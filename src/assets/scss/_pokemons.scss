@@ -1,0 +1,87 @@
+#pokemons {
+  .card.pokemon {
+    margin-bottom: 1.5rem;
+    border: 1.5px solid $success;
+    height: $card-height;
+    background: $card-background;
+    transition: box-shadow ease-in-out 0.3s, background-color ease-in-out 0.8s;
+    opacity: 1;
+    box-shadow: none;
+
+    &:hover {
+      //box-shadow: .5rem 1rem 2rem rgba(40, 167, 69, 0.5);
+
+      box-shadow: rgba(40, 167, 69, 0.2) 0px 0px 1rem,
+        rgba(40, 167, 69, 0.6) 0px 18px 32px -8px;
+      background: rgba(40, 167, 69, 0.01);
+    }
+
+    .card-title {
+      font-size: 1rem;
+    }
+
+    .card-text {
+      //line-height: 1.25;
+      min-height: 3.9rem;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-img-top {
+      width: 237px !important;
+      min-height: 237px;
+      text-align: center;
+      margin: 0 auto;
+      padding-top: 0.8rem;
+    }
+  }
+
+  .card.prototype {
+    margin-bottom: 1.5rem;
+    border: 1.5px solid $success;
+    height: $card-height;
+    background: $card-background;
+
+    .card-title {
+      width: 30%;
+      line-height: 1;
+      height: 1rem;
+      background-color: $fake-background;
+    }
+
+    .card-subtitle {
+      width: 55%;
+      height: 1rem;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      background-color: $fake-background;
+    }
+
+    .card-text {
+      line-height: 1;
+      width: 100%;
+      height: 1rem;
+      background-color: $fake-background;
+    }
+
+    .card-img {
+      width: calc(100% - 30px);
+      text-align: center;
+      padding-top: 2rem;
+      height: 215px;
+      margin: 15px;
+      background-color: $fake-background;
+
+      border-radius: 0.25rem;
+    }
+
+    .card-button {
+      width: 65px;
+      background: $fake-background;
+      border-radius: 0.25rem;
+      height: 38px;
+    }
+  }
+}

@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+  'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  font-kerning: auto;
+}
+
+code,
+input,
+button,
+textarea {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+  'Helvetica Neue', sans-serif;
+}
+
+button {
+  font-weight: 700;
+}
+
+.quotes {
+  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-style: italic;
+}
+
+::selection {
+  background: $success;
+  color: $white;
+  text-shadow: none;
+}
+
+h1 {
+  font-weight: 700;
+  margin-bottom: 2rem;
+  line-height: 2;
+  color: $success;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 2px 2px 0 #fff, 3px 3px 0 #ddd;
+}
+
+i.arrow-back {
+  font-size: 36px;
+  color: $success;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  background-color: transparent;
+  width: 36px;
+  border-radius: 50%;
+  transition: box-shadow ease-in 0.5s;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);
+    background-color: transparent;
+  }
+}
+
+.App {
+  text-align: left;
+}

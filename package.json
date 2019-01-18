@@ -1,0 +1,60 @@
+{
+  "name": "react2graphql",
+  "version": "0.1.0",
+  "private": true,
+  "precommit": "NODE_ENV=production lint-staged",
+  "dependencies": {
+    "apollo-boost": "^0.1.23",
+    "bootstrap": "^4.2.1",
+    "env-cmd": "^8.0.2",
+    "graphql": "^14.0.2",
+    "history": "^4.7.2",
+    "lodash": "^4.17.11",
+    "material-design-icons": "^3.0.1",
+    "node-sass": "^4.11.0",
+    "react": "^16.7.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-apollo": "^2.3.3",
+    "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.3",
+    "reactstrap": "^7.0.2",
+    "source-map-explorer": "^1.6.0",
+    "styled-components": "^4.1.3"
+  },
+  "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "start": "react-scripts start",
+    "build": "react-scripts build --production",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "pretty-quick --staged",
+      "eslint src/ --fix",
+      "git add"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.5.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "pretty-quick": "^1.10.0"
+  }
+}

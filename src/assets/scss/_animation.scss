@@ -1,0 +1,20 @@
+.card-loading-animation {
+  background: linear-gradient(
+    90deg,
+    $fake-background 25%,
+    $fake-background2 37%,
+    $fake-background 63%
+  );
+  background-size: 400% 100%;
+  animation: card-loading 1.5s ease infinite;
+}
+
+@keyframes card-loading {
+  0% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}

@@ -1,0 +1,167 @@
+#pokemon {
+  .card.pokemon-detail {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1.5px solid $success;
+    min-height: $big-card-height;
+    overflow: auto;
+    background: $card-background;
+    background: linear-gradient(
+      to bottom,
+      $card-background-from,
+      $card-background-to
+    );
+    box-shadow: rgba(40, 167, 69, 0.2) 0px 0px 1rem,
+      rgba(40, 167, 69, 0.6) 0px 12px 24px -8px;
+
+    .card-title {
+      h1 {
+        font-size: 1.75rem;
+        text-align: left;
+        font-weight: 700;
+        line-height: 1.75rem;
+        text-transform: capitalize;
+        text-shadow: 2px 2px 0 #fff, 3px 3px 0 #ddd;
+      }
+    }
+
+    .card-subtitle {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+
+      .icon-type-wrapper {
+        margin-right: 1rem;
+      }
+
+      margin-bottom: 0.75rem;
+    }
+
+    .card-text {
+      //line-height: 1.25;
+      // min-height: 2.5rem;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-img-top {
+      max-width: 300px;
+      //width: 50%;
+      height: auto;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .card-video-top {
+      margin: 0 auto;
+    }
+
+    .stats-row {
+      // border: 1px solid $success;
+      background-color: $card-background-highlight;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .weakness-list,
+    .resistance-list {
+      list-style: none;
+      padding-left: 0;
+      li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .effectiveness {
+          margin-left: 1rem;
+          margin-bottom: 0.5rem;
+          line-height: 32px;
+          &.eff-2x,
+          &.eff-3x {
+            color: #fff;
+            line-height: 28px;
+            border-radius: 0.25rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+    .weakness-list .effectiveness {
+      color: $danger;
+      &.eff-2x {
+        background-color: $danger;
+      }
+      &.eff-3x {
+        background-color: darkred;
+      }
+    }
+    .resistance-list .effectiveness {
+      color: $success;
+      &.eff-2x {
+        background-color: $success;
+      }
+      &.eff-3x {
+        background-color: darkgreen;
+      }
+    }
+  }
+
+  .card.prototype {
+    margin-top: 1rem;
+    height: calc(100vh - 2.5rem);
+    min-height: 640px;
+    margin-bottom: 1.5rem;
+    border: 1.5px solid $success;
+    background: $card-background;
+    overflow: auto;
+
+    .arrow-back {
+      width: 36px;
+      height: 36px;
+      background-color: $fake-background;
+      display: block;
+      border-radius: 0.25rem;
+      margin-bottom: 1rem;
+      margin-left: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card-title {
+      width: 20%;
+      line-height: 1;
+      height: 1rem;
+      background-color: $fake-background;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-subtitle {
+      width: 35%;
+      height: 1rem;
+      line-height: 1;
+      margin-bottom: 2rem;
+      background-color: $fake-background;
+      margin-top: 0;
+    }
+
+    .card-text {
+      line-height: 1;
+      width: 100%;
+      height: 1rem;
+      margin-bottom: 1rem;
+      background-color: $fake-background;
+    }
+
+    .card-img {
+      text-align: center;
+      margin: 0 auto;
+      padding-top: 2rem;
+      height: 300px;
+      width: 300px;
+      background-color: $fake-background;
+      border-radius: 0.25rem;
+    }
+  }
+}

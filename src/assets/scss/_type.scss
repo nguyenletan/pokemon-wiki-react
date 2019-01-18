@@ -1,0 +1,294 @@
+.bug-text {
+  color: $bug-color;
+  font-weight: $type-font-size;
+}
+
+.dark-text {
+  color: $dark-color;
+  font-weight: $type-font-size;
+}
+
+.dragon-text {
+  color: $dragon-color;
+  font-weight: $type-font-size;
+}
+
+.electric-text {
+  color: $electric-color;
+  font-weight: $type-font-size;
+}
+
+.fairy-text {
+  color: $fairy-color;
+  font-weight: $type-font-size;
+}
+
+.fighting-text {
+  color: $fighting-color;
+  font-weight: $type-font-size;
+}
+
+.fire-text {
+  color: $fire-color;
+  font-weight: $type-font-size;
+}
+
+.flying-text {
+  color: $flying-color;
+  font-weight: $type-font-size;
+}
+
+.ghost-text {
+  color: $ghost-color;
+  font-weight: $type-font-size;
+}
+
+.grass-text {
+  color: $grass-color;
+  font-weight: $type-font-size;
+}
+
+.ground-text {
+  color: $ground-color;
+  font-weight: $type-font-size;
+}
+
+.ice-text {
+  color: $ice-color;
+  font-weight: $type-font-size;
+}
+
+.normal-text {
+  color: $normal-color;
+  font-weight: $type-font-size;
+}
+
+.poison-text {
+  color: $poison-color;
+  font-weight: $type-font-size;
+}
+
+.psychic-text {
+  color: $psychic-color;
+  font-weight: $type-font-size;
+}
+
+.rock-text {
+  color: $rock-color;
+  font-weight: $type-font-size;
+}
+
+.steel-text {
+  color: $steel-color;
+  font-weight: $type-font-size;
+}
+
+.water-text {
+  color: $water-color;
+  font-weight: $type-font-size;
+}
+
+.type-background {
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.15rem;
+  padding: 0.15rem 0.55rem 0.2rem 0.55rem;
+  align-items: center;
+  margin-left: 0.5rem;
+  font-weight: $type-font-size;
+  transition: color ease-in-out 0.3s;
+  text-transform: capitalize;
+  text-shadow: 0 1px 2px #222;
+  &:hover {
+    text-decoration: none;
+    color: #000;
+    text-shadow: none;
+  }
+}
+
+.icon-type-wrapper {
+  display: flex;
+  height: 32px;
+  align-items: center;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  width: auto;
+  margin-bottom: 0.5rem;
+  &:hover {
+    text-decoration: none;
+  }
+
+  .long-type-background {
+    text-align: left;
+    color: #fff;
+    width: 150px;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    padding-left: 1.8rem;
+    font-weight: $type-font-size;
+    transition: box-shadow ease-in-out 0.3s;
+    text-transform: capitalize;
+
+    font-size: 1rem;
+    height: 28px;
+    line-height: 28px;
+    margin-left: -1rem;
+    &:hover {
+      text-decoration: none;
+      box-shadow: rgba(0, 0, 0, 0.3) 0 12px 24px -8px;
+    }
+  }
+
+  .icon-type {
+    border-radius: 0.25rem;
+    width: 32px;
+    padding: 2px;
+    z-index: 2;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.bug-border {
+  border: 2px solid $bug-color;
+}
+
+.dark-border {
+  border: 2px solid $dark-color;
+}
+
+.dragon-border {
+  border: 2px solid $dragon-color;
+}
+
+.electric-border {
+  border: 2px solid $electric-color;
+}
+
+.fairy-border {
+  border: 2px solid $fairy-color;
+}
+
+.fighting-border {
+  border: 2px solid $fighting-color;
+}
+
+.fire-border {
+  border: 2px solid $fire-color;
+}
+
+.flying-border {
+  border: 2px solid $flying-color;
+}
+
+.ghost-border {
+  border: 2px solid $ghost-color;
+}
+
+.grass-border {
+  border: 2px solid $grass-color;
+}
+
+.ground-border {
+  border: 2px solid $ground-color;
+}
+
+.ice-border {
+  border: 2px solid $ice-color;
+}
+
+.normal-border {
+  border: 2px solid $normal-color;
+}
+
+.poison-border {
+  border: 2px solid $poison-color;
+}
+
+.psychic-border {
+  border: 2px solid $psychic-color;
+}
+
+.rock-border {
+  border: 2px solid $rock-color;
+}
+
+.steel-border {
+  border: 2px solid $steel-color;
+}
+
+.water-border {
+  border: 2px solid $water-color;
+}
+
+.bug-background {
+  background-color: $bug-color;
+}
+
+.dark-background {
+  background-color: $dark-color;
+}
+
+.dragon-background {
+  background-color: $dragon-color;
+}
+
+.electric-background {
+  background-color: $electric-color;
+}
+
+.fairy-background {
+  background-color: $fairy-color;
+}
+
+.fighting-background {
+  background-color: $fighting-color;
+}
+
+.fire-background {
+  background-color: $fire-color;
+}
+
+.flying-background {
+  background-color: $flying-color;
+}
+
+.ghost-background {
+  background-color: $ghost-color;
+}
+
+.grass-background {
+  background-color: $grass-color;
+}
+
+.ground-background {
+  background-color: $ground-color;
+}
+
+.ice-background {
+  background-color: $ice-color;
+}
+
+.normal-background {
+  background-color: $normal-color;
+}
+
+.poison-background {
+  background-color: $poison-color;
+}
+
+.psychic-background {
+  background-color: $psychic-color;
+}
+
+.rock-background {
+  background-color: $rock-color;
+}
+
+.steel-background {
+  background-color: $steel-color;
+}
+
+.water-background {
+  background-color: $water-color;
+}
