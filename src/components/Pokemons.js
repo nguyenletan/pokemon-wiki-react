@@ -2,6 +2,8 @@ import { gql } from 'apollo-boost';
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroller';
+import { random } from 'lodash';
 import {
   Button,
   Card,
@@ -19,8 +21,8 @@ import SmallSkeleton from './SmallSkeleton';
 // add some queries for retrieving all Lifts and all Trails
 // language=GraphQL
 const ALL_POKEMONS_QUERY = gql`
-  query {
-    getPokemons {
+  query getPokemons($pageSize: Int, $offset: Int) {
+    getPokemons(limit: $pageSize, offset: $offset) {
       name
       url
       id
@@ -49,7 +51,7 @@ const PokemonDetail = ({ id }) => (
   <Query query={GET_POKEMON_QUERY} variables={{ id }}>
     {({ loading, error, data }) => {
       if (loading) {
-        return <SmallSkeleton/>;
+        return <SmallSkeleton />;
       }
       if (error) return `${error}`;
       const pokemon = data.getPokemon;
@@ -64,13 +66,12 @@ const PokemonDetail = ({ id }) => (
       };
       // const imgSrc = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgId()}.png`;
       const imgSrc = `https://db.pokemongohub.net/images/official/full/${imgId()}.png`;
-      
+
       return (
         <Card className="pokemon">
-          <CardImg top width="100%" src={imgSrc} alt={pokemon.name}/>
+          <CardImg top width="100%" src={imgSrc} alt={pokemon.name} />
           <CardBody>
-            <CardTitle
-              className="text-capitalize text-danger font-weight-bold">
+            <CardTitle className="text-capitalize text-danger font-weight-bold">
               {pokemon.id}. {pokemon.name}
             </CardTitle>
             <CardText>
@@ -78,7 +79,7 @@ const PokemonDetail = ({ id }) => (
               <Link
                 className={`type-background  ${
                   pokemon.types[0].type.name
-                  }-background`}
+                }-background`}
                 to={`/type/${pokemon.types[0].type.name}`}
               >
                 {Helpers.toCapitalize(pokemon.types[0].type.name)}
@@ -87,7 +88,7 @@ const PokemonDetail = ({ id }) => (
                 <Link
                   className={`type-background  ${
                     pokemon.types[1].type.name
-                    }-background`}
+                  }-background`}
                   to={`/type/${pokemon.types[1].type.name}`}
                 >
                   {Helpers.toCapitalize(pokemon.types[1].type.name)}
@@ -107,8 +108,12 @@ const PokemonDetail = ({ id }) => (
   </Query>
 );
 
-const PokemonList = () => (
-  <Query key="Pokemons" query={ALL_POKEMONS_QUERY}>
+const QueryPokemons = ({ pageSize, offset }) => (
+  <Query
+    key="QueryPokemons"
+    query={ALL_POKEMONS_QUERY}
+    variables={{ pageSize, offset }}
+  >
     {({ loading, error, data }) => {
       if (loading) {
         const loadingPrototype = [];
@@ -116,12 +121,12 @@ const PokemonList = () => (
           loadingPrototype.push(
             <Col key={i} xs="12" sm="8" md="6" lg="4" xl="3">
               <Card className="prototype">
-                <div className="card-img card-loading-animation"/>
+                <div className="card-img card-loading-animation" />
                 <CardBody>
-                  <CardTitle className="card-loading-animation"/>
-                  <CardSubtitle className="card-loading-animation"/>
-                  <CardText className="card-loading-animation"/>
-                  <div className="card-button"/>
+                  <CardTitle className="card-loading-animation" />
+                  <CardSubtitle className="card-loading-animation" />
+                  <CardText className="card-loading-animation" />
+                  <div className="card-button" />
                 </CardBody>
               </Card>
             </Col>
@@ -132,12 +137,12 @@ const PokemonList = () => (
       if (error) {
         return `${error}!`;
       }
-      
+
       return (
         !loading &&
         data.getPokemons.map((poke, i) => (
           <Col xs="12" sm="8" md="6" lg="4" xl="3" key={poke.id}>
-            <PokemonDetail id={poke.id} key={poke.id} index={i}/>
+            <PokemonDetail id={poke.id} key={poke.id} index={i} />
           </Col>
         ))
       );
@@ -146,14 +151,17 @@ const PokemonList = () => (
 );
 
 const Pokemons = () => (
-    <div id="pokemons">
-      <h1>Pokemons</h1>
-      <div className="container-fluid">
-        <Row className="justify-content-md-start justify-content-sm-around">
-          <PokemonList/>
-        </Row>
-      </div>
+  <div id="pokemons">
+    <h1>Pokemons</h1>
+    <div className="container-fluid">
+      <Row className="justify-content-md-start justify-content-sm-around">
+        <QueryPokemons
+          pageSize={Helpers.getPageSize()}
+          offset={random(0, Helpers.getMaxPokemonId() - Helpers.getPageSize())}
+        />
+      </Row>
     </div>
-  );
+  </div>
+);
 
 export default Pokemons;

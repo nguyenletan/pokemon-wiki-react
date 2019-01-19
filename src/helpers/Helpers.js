@@ -62,6 +62,8 @@ class Helpers {
   }
 
   static getMaxPokemonId = () => 809;
+  
+  static getPageSize = () => 8;
 }
 
 export default Helpers;
