@@ -390,7 +390,7 @@ const PokemonDetail = ({ id }) => (
                 loop
                 id="pokemonVideoPlayer"
                 height="290"
-                title="Volbeat animated sprite"
+                title="{pokemon.name} animated sprite"
               >
                 <track kind="captions" />
                 <source src={videoSrc} type="video/mp4" />

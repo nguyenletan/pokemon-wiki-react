@@ -2,8 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-  'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-  'Helvetica Neue', sans-serif;
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
@@ -15,8 +15,8 @@ input,
 button,
 textarea {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-  'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-  'Helvetica Neue', sans-serif;
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
 }
 
 button {
@@ -24,7 +24,8 @@ button {
 }
 
 .quotes {
-  font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-family: 'Berkshire Swash', 'IBM Plex Serif', 'Georgia', 'Times New Roman',
+    serif;
   font-style: italic;
 }
 
@@ -35,6 +36,9 @@ button {
 }
 
 h1 {
+  font-family: 'IBM Plex Sans', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   margin-bottom: 2rem;
   line-height: 2;
@@ -59,6 +63,14 @@ i.arrow-back {
     box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);
     background-color: transparent;
   }
+}
+
+.infinite-loader {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .App {

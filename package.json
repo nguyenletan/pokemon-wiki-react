@@ -1,5 +1,5 @@
 {
-  "name": "react2graphql",
+  "name": "pokemon-wiki-react",
   "version": "0.1.0",
   "private": true,
   "precommit": "NODE_ENV=production lint-staged",

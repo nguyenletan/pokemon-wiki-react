@@ -61,8 +61,38 @@ class Helpers {
     return `https://db.pokemongohub.net/videos/normal/${name}.mp4`;
   }
 
-  static getMaxPokemonId = () => 809;
-  
+  static getGenerationById(id) {
+    for (let i = 1; i <= 7; i += 1) {
+      if (id < Helpers.getMaxPokeMonIdFofGeneration(i)) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
+  static getMaxPokemonId = () => 802;
+
+  static getMaxPokeMonIdFofGeneration(generation) {
+    switch (generation) {
+      case 1:
+        return 151;
+      case 2:
+        return 251;
+      case 3:
+        return 386;
+      case 4:
+        return 493;
+      case 5:
+        return 649;
+      case 6:
+        return 721;
+      case 7:
+        return 802;
+      default:
+        return 0;
+    }
+  }
+
   static getPageSize = () => 8;
 }
 
