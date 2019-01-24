@@ -1,9 +1,8 @@
 import { gql } from 'apollo-boost';
-import { createBrowserHistory } from 'history';
 import _ from 'lodash';
 import React, { Fragment } from 'react';
 import { Query } from 'react-apollo';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
   Card,
   CardBody,
@@ -14,14 +13,14 @@ import {
   Col,
   Row
 } from 'reactstrap';
+
 import Helpers from '../helpers/Helpers';
 import BigSkeleton from './BigSkeleton';
 
 // add some queries for retrieving all Lifts and all Trails
-// language=GraphQL
 const GET_POKEMON_QUERY = gql`
-  query GetPokemonFromHub($id: Int) {
-    getPokemonById(id: $id) {
+  query GetPokemonFromHub($id: Int, $form: String) {
+    getPokemonById(id: $id, form: $form) {
       id
       name
       form
@@ -49,12 +48,50 @@ const GET_POKEMON_QUERY = gql`
       genderless
       maxcp
       weatherInfluences
+      forms {
+        name
+        value
+      }
       typeChart {
         effectiveness
         status
         type
         statusModifier
       }
+      family {
+        id
+        index
+        name
+        form
+        type1
+        type2
+        generation
+        atk
+        sta
+        def
+        maxcp
+      }
+    }
+  }
+`;
+
+const GET_MINI_POKEMON_QUERY = gql`
+  query GetMiniPokemonFromHub($id: Int) {
+    minimalIdentifier: getPokemonById(id: $id) {
+      id
+      name
+      form
+      forms {
+        name
+        value
+      }
+      type1
+      type2
+      atk
+      sta
+      def
+      generation
+      maxcp
     }
   }
 `;
@@ -110,7 +147,54 @@ const GET_MOVESETS_QUERY = gql`
   }
 `;
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
+
+const NavItem = props => {
+  const { id, isPrev } = props;
+  const htmlClass = isPrev
+    ? 'go-link go-prev-pokemon'
+    : 'go-link go-next-pokemon';
+  return (
+    <Query
+      query={GET_MINI_POKEMON_QUERY}
+      variables={{ id }}
+      fetchPolicy="cache-first"
+    >
+      {({ loading, error, data }) => {
+        if (loading) {
+          return (<span className="{htmlClass}" title="Go to pokemon"/>);
+        }
+        if (error) {
+          return <div>`${error}`</div>;
+        }
+
+        const pokemon = data.minimalIdentifier;
+        const imgUrl = Helpers.getPokemonImgUrl(pokemon);
+        return (
+          <Link to={`/pokemon/${pokemon.id}`} className={htmlClass} title={`Go to ${pokemon.name}`}>
+            <img className="pokemon-img" src={imgUrl} alt={pokemon.name} />
+            <span className="pokemon-name">{pokemon.name}</span>
+            <span className="pokemon-id">#{pokemon.id}</span>
+          </Link>
+        );
+      }}
+    </Query>
+  );
+};
+
+const Navigation = props => {
+  const { pokemon } = props;
+
+  const prevId = pokemon.id > 1 ? pokemon.id - 1 : 0;
+  const nextId = pokemon.id < Helpers.getMaxPokemonId() ? pokemon.id + 1 : 0;
+
+  return (
+    <nav className="navigation">
+      <NavItem id={prevId} isPrev />
+      <NavItem id={nextId} isPrev={false} />
+    </nav>
+  );
+};
 
 const CardType = props => {
   const { type } = props;
@@ -177,7 +261,11 @@ const CardTypeImg = props => {
 };
 
 const MoveSets = ({ id, pokemon }) => (
-  <Query query={GET_MOVESETS_QUERY} variables={{ id }}>
+  <Query
+    query={GET_MOVESETS_QUERY}
+    variables={{ id }}
+    fetchPolicy="cache-and-network"
+  >
     {({ loading, error, data }) => {
       if (loading) {
         return 'Loading...';
@@ -197,10 +285,12 @@ const MoveSets = ({ id, pokemon }) => (
         const bestMoveSet = Helpers.getBestMoveSet(movesets);
         return (
           <Fragment>
-            <strong>{pokemon.name}</strong> best moveset is{' '}
-            {bestMoveSet.quickMove.name} and {bestMoveSet.chargeMove.name}, with
-            a cycle (weave) DPS of {bestMoveSet.weaveDPS.toFixed(2)} damage per
-            second.
+            <strong>
+              {pokemon.name} {pokemon.form || ''}
+            </strong>{' '}
+            best moveset is <strong>{bestMoveSet.quickMove.name}</strong> and{' '}
+            <strong>{bestMoveSet.chargeMove.name}</strong>, with a cycle (weave)
+            DPS of {bestMoveSet.weaveDPS.toFixed(2)} damage per second.
           </Fragment>
         );
       }
@@ -238,17 +328,16 @@ const Stats = props => {
         </Col>
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <strong>Weight: </strong>
-          {pokemon.weight}
+          {pokemon.weight ? pokemon.weight.toFixed(2) : null}
         </Col>
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <strong>Height: </strong>
-          {pokemon.height}
+          {pokemon.height ? pokemon.height.toFixed(2) : null}
         </Col>
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <strong>Evolution Cost: </strong>
           {pokemon.candyToEvolve}
         </Col>
-
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <strong>Max-CP: </strong>
           {pokemon.maxcp}
@@ -268,15 +357,15 @@ const Stats = props => {
 
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <strong>Base Catch rate: </strong>
-          {pokemon.baseCaptureRate}
+          {pokemon.baseCaptureRate.toFixed(2)}
         </Col>
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <strong>Base Flee rate: </strong>
-          {pokemon.baseCaptureRate}
+          {pokemon.baseCaptureRate.toFixed(2)}
         </Col>
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <strong>Buddy walking distance: </strong>
-          {pokemon.baseCaptureRate}
+          {pokemon.baseCaptureRate.toFixed(2)}
         </Col>
         <Col xs={xs} sm={sm} md={6} lg={6} xl={4}>
           <strong>Second charge move Candy: </strong>
@@ -321,7 +410,6 @@ const Weaknesses = props => {
 
 const Resistances = props => {
   const { typeChart } = props;
-
   const resistanceItems = typeChart.filter(item => item.status === 'adv');
 
   return (
@@ -347,8 +435,142 @@ const Resistances = props => {
   );
 };
 
-const PokemonDetail = ({ id }) => (
-  <Query query={GET_POKEMON_QUERY} variables={{ id }}>
+const Family = props => {
+  const { family } = props;
+  if (
+    family === undefined ||
+    family === null ||
+    family.length == null ||
+    family.length === 0
+  ) {
+    return null;
+  }
+
+  const members = family.map((member, index) => {
+    const imgUrl = Helpers.getPokemonImgUrl(member);
+    const name = Helpers.getPokeName(member);
+    const aceIcons = ['♥', '♠', '♦', '♣'];
+    const aceClassNameColors = ['text-danger', 'text-dark'];
+    const { form } = member;
+    const linkUrl =
+      form === null
+        ? `/pokemon/${member.id}`
+        : `/pokemon/${member.id}/form/${form}`;
+    return (
+      <li key={`${member.id}-${index}`}>
+        <Link to={linkUrl}>
+          <span className={`member-name top ${aceClassNameColors[index % 2]}`}>
+            {member.name[0]}
+          </span>
+          <span className={`card-icon top ${aceClassNameColors[index % 2]}`}>
+            {aceIcons[index % 4]}
+          </span>
+          <img src={imgUrl} alt={name} />
+          <span
+            className={`font-weight-bold text-center ${
+              aceClassNameColors[index % 2]
+            }`}
+          >
+            {name}
+          </span>
+          <span className={`card-icon bottom ${aceClassNameColors[index % 2]}`}>
+            {aceIcons[index % 4]}
+          </span>
+          <span
+            className={`member-name bottom ${aceClassNameColors[index % 2]}`}
+          >
+            {member.name[0]}
+          </span>
+        </Link>
+      </li>
+    );
+  });
+  return (
+    <section className="family">
+      <p className="title">
+        <strong>Pokemon Family:</strong>
+      </p>
+      <ul className="family-list">{members}</ul>
+    </section>
+  );
+};
+
+const Information = props => {
+  const { pokemon } = props;
+  return (
+    <Fragment>
+      <CardText className="infomation">
+        <strong>
+          {pokemon.name} {pokemon.form || ''}
+        </strong>{' '}
+        is a
+        <span className={`type-background  ${pokemon.type1}-background`}>
+          {Helpers.toCapitalize(pokemon.type1)}
+        </span>
+        {pokemon.type2 ? (
+          <span className={`type-background ${pokemon.type2}-background`}>
+            {Helpers.toCapitalize(pokemon.type2)}
+          </span>
+        ) : null}{' '}
+        type Pokemon with a max CP of {pokemon.maxcp}, {pokemon.atk} attack,{' '}
+        {pokemon.def} defense and {pokemon.sta} stamina in Pokemon GO. It was
+        originally found in the {Helpers.getGenerationName(pokemon.generation)}{' '}
+        region (Gen {pokemon.generation}). {pokemon.name} is vulnerable to{' '}
+        {Helpers.arrayToString(Helpers.getVulnerableTypes(pokemon.typeChart))}{' '}
+        type moves. {pokemon.name} is boosted by{' '}
+        {Helpers.arrayToString(pokemon.weatherInfluences)} weather.
+      </CardText>
+      {pokemon.description !== null ? (
+        <CardText className="entry">
+          <strong>PokeEntry: </strong>
+          <span className="quotes">{`"${pokemon.description}"`}</span>
+        </CardText>
+      ) : null}
+    </Fragment>
+  );
+};
+
+const Forms = props => {
+  const { pokemon } = props;
+
+  if (pokemon.forms === null || pokemon.forms.length <= 1) {
+    return null;
+  }
+
+  const formList = pokemon.forms.map(form => {
+    const linkUrl =
+      form.value === ''
+        ? `/pokemon/${pokemon.id}`
+        : `/pokemon/${pokemon.id}/form/${form.value}`;
+    return (
+      <li className="form-item">
+        <NavLink exact to={linkUrl} title={`${pokemon.name} ${form.name}`}>
+          <img
+            src={Helpers.getFormImgUrl(pokemon.id, form.value)}
+            alt={`${pokemon.name} ${form.name}`}
+          />
+          <span className="name">{`${form.name} form`}</span>
+        </NavLink>
+      </li>
+    );
+  });
+
+  return (
+    <p className="forms">
+      <span className="title">
+        <strong>Form: </strong>
+      </span>
+      <ul className="form-list">{formList}</ul>
+    </p>
+  );
+};
+
+const PokemonDetail = ({ id, form }) => (
+  <Query
+    query={GET_POKEMON_QUERY}
+    variables={{ id, form }}
+    fetchPolicy="cache-and-network"
+  >
     {({ loading, error, data }) => {
       if (loading) {
         return <BigSkeleton />;
@@ -357,40 +579,41 @@ const PokemonDetail = ({ id }) => (
         return <div>`${error}`</div>;
       }
       const pokemon = data.getPokemonById;
-      const imgId = () => {
-        if (pokemon.id < 10) {
-          return `00${pokemon.id}`;
-        }
-        if (pokemon.id < 100) {
-          return `0${pokemon.id}`;
-        }
-        return `${pokemon.id}`;
-      };
-      const imgSrc = `https://db.pokemongohub.net/images/official/full/${imgId()}.png`;
+
+      if (pokemon !== null) {
+        Helpers.normalizePokemon(pokemon);
+      }
+      const imgSrc = Helpers.getPokemonImgUrl(pokemon);
       const videoSrc = Helpers.getVideoURL(pokemon);
+
       return (
         <Card className="pokemon-detail">
-          <i
-            role="link"
-            title="Go Back"
-            className="material-icons arrow-back"
-            tabIndex={-1}
-            onClick={history.goBack}
-            onKeyUp={history.goBack}
-          >
-            {' '}
-            keyboard_backspace
-          </i>
-          {pokemon.generation > 4 ? (
+          <Link to="/" title="Go back Home Page">
+            <i
+              role="link"
+              title="Go Back Home Page"
+              className="material-icons arrow-back"
+              tabIndex={-1}
+              /* onClick={history.goBack}
+              onKeyUp={history.goBack} */
+            >
+              keyboard_backspace
+            </i>
+          </Link>
+          {pokemon.generation > 4 ||
+          (form !== null && form !== undefined) ? (
             <CardImg top src={imgSrc} alt={pokemon.name} />
           ) : (
-            <figure className="card-video-top" style={{ margin: '0 auto' }}>
+            <figure
+              className="card-video-top"
+              style={{ margin: '0 auto' }}
+            >
               <video
                 autoPlay
                 loop
                 id="pokemonVideoPlayer"
                 height="290"
-                title="Volbeat animated sprite"
+                title={`${pokemon.name} animated sprite`}
               >
                 <track kind="captions" />
                 <source src={videoSrc} type="video/mp4" />
@@ -400,44 +623,24 @@ const PokemonDetail = ({ id }) => (
           <CardBody>
             <CardTitle>
               <h1>
-                {pokemon.id}.{pokemon.name}
+                {pokemon.id}.{pokemon.name} {form || ''}
               </h1>
             </CardTitle>
+            <Navigation pokemon={pokemon} />
             <CardSubtitle>
               <CardTypeImg pokemon={pokemon} />
             </CardSubtitle>
+
+            <Forms pokemon={pokemon} />
+
             <Stats pokemon={pokemon} />
-            <CardText className="detail">
-              <strong>{pokemon.name}</strong> is a
-              <span className={`type-background  ${pokemon.type1}-background`}>
-                {Helpers.toCapitalize(pokemon.type1)}
-              </span>
-              {pokemon.type2 ? (
-                <span className={`type-background ${pokemon.type2}-background`}>
-                  {Helpers.toCapitalize(pokemon.type2)}
-                </span>
-              ) : null}{' '}
-              type Pokemon with a max CP of {pokemon.maxcp}, {pokemon.atk}{' '}
-              attack, {pokemon.def} defense and {pokemon.sta} stamina in Pokemon
-              GO. It was originally found in the{' '}
-              {Helpers.getGenerationName(pokemon.generation)} region (Gen{' '}
-              {pokemon.generation}). {pokemon.name} is vulnerable to{' '}
-              {Helpers.arrayToString(
-                Helpers.getVulnerableTypes(pokemon.typeChart)
-              )}{' '}
-              type moves. {pokemon.name} is boosted by{' '}
-              {Helpers.arrayToString(pokemon.weatherInfluences)} weather.
-            </CardText>
-            {pokemon.description !== null ? (
-              <CardText className="entry">
-                <strong>PokeEntry: </strong>
-                <span className="quotes">{`"${pokemon.description}"`}</span>
-              </CardText>
-            ) : null}
+
+            <Information pokemon={pokemon} />
 
             <CardText className="moveset">
               <MoveSets id={pokemon.id} pokemon={pokemon} />
             </CardText>
+
             <Row>
               <Col sm={12} lg={6}>
                 <Resistances typeChart={pokemon.typeChart} />
@@ -446,6 +649,8 @@ const PokemonDetail = ({ id }) => (
                 <Weaknesses typeChart={pokemon.typeChart} />
               </Col>
             </Row>
+
+            <Family family={pokemon.family} />
           </CardBody>
         </Card>
       );
@@ -455,12 +660,16 @@ const PokemonDetail = ({ id }) => (
 
 const Pokemon = props => {
   const { match } = props;
+
   return (
     <div id="pokemon">
       <div className="container-fluid">
         <Row className="justify-content-center">
           <Col xs="12" sm="12" md="10" lg="10" xl="9">
-            <PokemonDetail id={Number(match.params.id)} />
+            <PokemonDetail
+              id={Number(match.params.id)}
+              form={match.params.form}
+            />
           </Col>
         </Row>
       </div>

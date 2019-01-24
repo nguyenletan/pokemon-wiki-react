@@ -1,0 +1,55 @@
+.card.big-skeleton {
+  margin-top: 1rem;
+  height: calc(100vh - 2.5rem);
+  min-height: 640px;
+  margin-bottom: 1.5rem;
+  border: 1.5px solid $success;
+  background: $card-background;
+  overflow: auto;
+
+  .arrow-back {
+    width: 36px;
+    height: 36px;
+    background-color: $fake-background;
+    display: block;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+
+  .card-title {
+    width: 20%;
+    line-height: 1;
+    height: 1rem;
+    background-color: $fake-background;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-subtitle {
+    width: 35%;
+    height: 1rem;
+    line-height: 1;
+    margin-bottom: 2rem;
+    background-color: $fake-background;
+    margin-top: 0;
+  }
+
+  .card-text {
+    line-height: 1;
+    width: 100%;
+    height: 1rem;
+    margin-bottom: 1rem;
+    background-color: $fake-background;
+  }
+
+  .card-img {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 2rem;
+    height: 300px;
+    width: 300px;
+    background-color: $fake-background;
+    border-radius: 0.25rem;
+  }
+}

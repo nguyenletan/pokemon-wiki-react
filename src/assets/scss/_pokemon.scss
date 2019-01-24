@@ -53,8 +53,137 @@
       text-align: center;
       margin: 0 auto;
     }
+
     .card-video-top {
       margin: 0 auto;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      justify-items: center;
+      margin-bottom: 1.25rem;
+      margin-left: 5px;
+      margin-right: 5px;
+      flex-wrap: wrap;
+      .go-link {
+        display: flex;
+        justify-content: space-between;
+        justify-items: center;
+        height: 34px;
+        background-color: $fake-background;
+        color: $dark;
+        width: 49%;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        margin-bottom: 1rem;
+        transition: box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+        padding-top: 4px;
+        &:hover {
+          box-shadow: rgba(40, 167, 69, 0.4) 0 12px 24px -8px;
+          color: $success;
+        }
+        &.go-prev-pokemon {
+          flex-direction: row;
+          .pokemon-img {
+            margin-left: -10px;
+          }
+          .pokemon-id {
+            margin-right: 0.5rem;
+          }
+        }
+
+        &.go-next-pokemon {
+          flex-direction: row-reverse;
+          .pokemon-img {
+            margin-right: -10px;
+          }
+          .pokemon-id {
+            margin-left: 0.5rem;
+          }
+        }
+
+        .pokemon-img {
+          border-radius: 50%;
+          margin-top: -6.5px;
+          width: 40px;
+          height: 40px;
+          z-index: 2;
+          background-color: white;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          border: 2px solid $success;
+          text-align: right;
+        }
+        .pokemon-name {
+          font-weight: 700;
+          height: 34px;
+          display: block;
+          //color: $success;
+        }
+        .pokemon-id {
+          height: 34px;
+          display: block;
+          color: $success;
+        }
+      }
+    }
+
+    .forms {
+      margin-bottom: 1.5rem;
+      .title {
+        margin-right: 0.5rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+      .form-list {
+        list-style: none;
+        display: flex;
+        margin-left: 0;
+        padding-left: 0;
+
+        li a {
+          text-decoration: none;
+          border: 1px solid $secondary;
+          border-radius: 0.25rem;
+          margin-right: 1.25rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 1rem;
+          transition: box-shadow 0.3s ease-in-out,
+            background-color 0.3s ease-in-out;
+          background-color: rgba(40, 167, 69, 0.01);
+          cursor: pointer;
+          opacity: 0.3;
+          box-shadow: 0rem 0rem 0.5rem rgba(40, 167, 69, 0.5);
+          &:hover {
+            border: 1px solid $success;
+            box-shadow: 0.5rem 0.3rem 2rem rgba(40, 167, 69, 0.4);
+            background-color: #fff;
+            color: $success;
+            opacity: 1;
+          }
+          &.active {
+            border: 1px solid $success;
+            box-shadow: 0.5rem 0.3rem 2rem rgba(40, 167, 69, 0.4);
+            background-color: #fff;
+            opacity: 1;
+            .name {
+              text-align: center;
+              color: $success;
+              font-weight: 700;
+            }
+          }
+          .name {
+            text-align: center;
+            color: $secondary;
+            font-weight: 700;
+          }
+          img {
+            width: 100px;
+          }
+        }
+      }
     }
 
     .stats-row {
@@ -89,6 +218,7 @@
         }
       }
     }
+
     .weakness-list .effectiveness {
       color: $danger;
       &.eff-2x {
@@ -98,6 +228,7 @@
         background-color: darkred;
       }
     }
+
     .resistance-list .effectiveness {
       color: $success;
       &.eff-2x {
@@ -107,61 +238,82 @@
         background-color: darkgreen;
       }
     }
-  }
 
-  .card.prototype {
-    margin-top: 1rem;
-    height: calc(100vh - 2.5rem);
-    min-height: 640px;
-    margin-bottom: 1.5rem;
-    border: 1.5px solid $success;
-    background: $card-background;
-    overflow: auto;
+    .family {
+      margin-left: -1rem;
 
-    .arrow-back {
-      width: 36px;
-      height: 36px;
-      background-color: $fake-background;
-      display: block;
-      border-radius: 0.25rem;
-      margin-bottom: 1rem;
-      margin-left: 1rem;
-      margin-top: 1rem;
-    }
+      .title {
+        margin-left: 1rem;
+      }
+      img {
+        width: 125px;
+        margin: 0 auto;
+      }
+      .family-list {
+        margin-bottom: 0px;
+        list-style: none;
+        display: flex;
+        justify-content: flex-start;
+        justify-items: center;
+        margin-left: 0;
+        padding-left: 0;
+        flex-wrap: wrap;
+        li a {
+          text-decoration: none;
+          border: 1px solid $success;
+          border-radius: 0.25rem;
+          box-shadow: 0rem 0rem 0.5rem rgba(40, 167, 69, 0.5);
+          margin-left: 1rem;
+          margin-bottom: 1rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          justify-items: center;
+          height: 239px;
+          width: 150px;
+          padding-top: 0.4rem;
+          padding-bottom: 0.4rem;
+          transition: box-shadow 0.3s ease-in-out,
+            background-color 0.3s ease-in-out;
+          background-color: rgba(40, 167, 69, 0.01);
+          cursor: pointer;
+          &:hover {
+            box-shadow: 0.5rem 0.3rem 2rem rgba(40, 167, 69, 0.4);
+            background-color: #fff;
+          }
 
-    .card-title {
-      width: 20%;
-      line-height: 1;
-      height: 1rem;
-      background-color: $fake-background;
-      margin-bottom: 1.25rem;
-    }
-
-    .card-subtitle {
-      width: 35%;
-      height: 1rem;
-      line-height: 1;
-      margin-bottom: 2rem;
-      background-color: $fake-background;
-      margin-top: 0;
-    }
-
-    .card-text {
-      line-height: 1;
-      width: 100%;
-      height: 1rem;
-      margin-bottom: 1rem;
-      background-color: $fake-background;
-    }
-
-    .card-img {
-      text-align: center;
-      margin: 0 auto;
-      padding-top: 2rem;
-      height: 300px;
-      width: 300px;
-      background-color: $fake-background;
-      border-radius: 0.25rem;
+          .member-name {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            display: inline;
+            line-height: 1;
+            &.top {
+              margin-left: 0.5rem;
+            }
+            &.bottom {
+              margin-right: 0.5rem;
+              text-align: right;
+            }
+          }
+          .card-icon {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            line-height: 1;
+            display: inline;
+            &.top {
+              margin-left: 0.5rem;
+              margin-top: -0.1rem;
+            }
+            &.bottom {
+              margin-right: 0.5rem;
+              margin-bottom: -0.1rem;
+              text-align: right;
+            }
+          }
+        }
+      }
     }
   }
 }
