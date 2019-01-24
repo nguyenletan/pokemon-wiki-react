@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## BackEnd source code
 
-[Pokemon wiki apollo](https://github.com/nguyenletan/pokemon-wiki-apollo).
+[Pokemon wiki apollo](https://github.com/nguyenletan/pokemon-wiki-apollo)
 
 ## Available Scripts
 
