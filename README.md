@@ -8,6 +8,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ![](https://photo2.tinhte.vn/data/attachment-files/2019/01/4553046_screencapture-localhost-3000-pokemon-31-2019-01-23-12_58_26.png)
 
+## BackEnd source code
+
+[Pokemon wiki apollo](https://github.com/nguyenletan/pokemon-wiki-apollo).
+
 ## Available Scripts
 
 In the project directory, you can run:
