@@ -10,7 +10,8 @@ const AppRouter = () => (
       <Route path="/" exact component={Pokemons} />
       <Route path="/pokemons" component={Pokemons} />
       <Route path="/type/:name" component={Type} />
-      <Route path="/pokemon/:id" component={Pokemon} />
+      <Route path="/pokemon/:id" exact component={Pokemon} />
+      <Route path="/pokemon/:id/form/:form" component={Pokemon} />
     </Switch>
   </Router>
 );

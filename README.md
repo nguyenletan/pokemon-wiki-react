@@ -2,6 +2,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Screenshot
 
+![](https://photo2.tinhte.vn/data/attachment-files/2019/01/4553048_screencapture-localhost-3000-pokemon-26-form-Alola-2019-01-23-12_56_52.png)
+
+![](https://photo2.tinhte.vn/data/attachment-files/2019/01/4553047_Screen_Shot_2019-01-10_at_11.07.50.png)
+
+![](https://photo2.tinhte.vn/data/attachment-files/2019/01/4553046_screencapture-localhost-3000-pokemon-31-2019-01-23-12_58_26.png)
+
 ## Available Scripts
 
 In the project directory, you can run:

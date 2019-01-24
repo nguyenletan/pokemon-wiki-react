@@ -70,6 +70,58 @@ class Helpers {
     return 0;
   }
 
+  static getPokemonImgUrl = pokemon => {
+    const imgId = () => {
+      if (pokemon.id < 10) {
+        return `00${pokemon.id}`;
+      }
+      if (pokemon.id < 100) {
+        return `0${pokemon.id}`;
+      }
+      return `${pokemon.id}`;
+    };
+
+    return pokemon.form !== null && pokemon.form !== undefined
+      ? `https://db.pokemongohub.net/images/official/full/${imgId()}_f2.png`
+      : `https://db.pokemongohub.net/images/official/full/${imgId()}.png`;
+  };
+
+  static getFormImgUrl = (pokemonId, formValue) => {
+    const imgId = () => {
+      if (pokemonId < 10) {
+        return `00${pokemonId}`;
+      }
+      if (pokemonId < 100) {
+        return `0${pokemonId}`;
+      }
+      return `${pokemonId}`;
+    };
+
+    return formValue !== ''
+      ? `https://db.pokemongohub.net/images/official/full/${imgId()}_f2.png`
+      : `https://db.pokemongohub.net/images/official/full/${imgId()}.png`;
+  };
+
+  static normalizePokemon = pokemon => {
+    // normalize family
+    const { family } = pokemon;
+    if (family !== null) {
+      for (let i = 0; i < family.length; i += 1) {
+        if (family[i].id !== family[i].index) {
+          family[i].id = family[i].index || family[i].id;
+        }
+      }
+    }
+    return pokemon;
+  };
+
+  static getPokeName = pokemon => {
+    const { name, form } = pokemon;
+    return form !== null && form !== undefined && form !== ''
+      ? `${name} ${form}`
+      : name;
+  };
+
   static getMaxPokemonId = () => 802;
 
   static getMaxPokeMonIdFofGeneration(generation) {
@@ -93,7 +145,7 @@ class Helpers {
     }
   }
 
-  static getPageSize = () => 8;
+  static getPageSize = () => 32;
 }
 
 export default Helpers;

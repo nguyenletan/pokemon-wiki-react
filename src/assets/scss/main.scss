@@ -1,8 +1,11 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~material-design-icons/iconfont/material-icons.css';
+@import './dank-mono';
 
 @import './variables';
 @import './animation';
+@import './big-skeleton';
+@import './small-skeleton';
 @import './type';
 @import './pokemons';
 @import './pokemon';

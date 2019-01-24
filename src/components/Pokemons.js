@@ -3,7 +3,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
-import { random } from "lodash";
+import { random } from 'lodash';
 
 import {
   Button,
@@ -50,45 +50,46 @@ const GET_POKEMON_QUERY = gql`
 `;
 
 const PokemonDetail = ({ id }) => (
-  <Query query={GET_POKEMON_QUERY} variables={{ id }}>
+  <Query
+    query={GET_POKEMON_QUERY}
+    variables={{ id }}
+    fetchPolicy="cache-first"
+    partialRefetch
+    notifyOnNetworkStatusChange
+  >
     {({ loading, error, data }) => {
       if (loading) {
         return <SmallSkeleton />;
       }
       if (error) {
-        return `${error}`
-      };
+        return `${error}`;
+      }
       const pokemon = data.getPokemon;
-      const imgId = () => {
-        if (pokemon.id < 10) {
-          return `00${pokemon.id}`;
-        }
-        if (pokemon.id < 100) {
-          return `0${pokemon.id}`;
-        }
-        return `${pokemon.id}`;
-      };
-      // const imgSrc = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgId()}.png`;
-      const imgSrc = `https://db.pokemongohub.net/images/official/full/${imgId()}.png`;
+      const imgUrl = Helpers.getPokemonImgUrl(pokemon);
 
       return (
         <Card className="pokemon">
-          <CardImg top width="100%" src={imgSrc} alt={pokemon.name} />
+          <CardImg top width="100%" src={imgUrl} alt={pokemon.name} />
           <CardBody>
             <CardTitle className="text-capitalize text-danger font-weight-bold">
-              {pokemon.id}. {pokemon.name} (Gen: {Helpers.getGenerationById(pokemon.id)})
+              {pokemon.id}. {pokemon.name} (Gen:{' '}
+              {Helpers.getGenerationById(pokemon.id)})
             </CardTitle>
             <CardText>
               This is a
               <Link
-                className={`type-background  ${pokemon.types[0].type.name}-background`}
+                className={`type-background  ${
+                  pokemon.types[0].type.name
+                }-background`}
                 to={`/type/${pokemon.types[0].type.name}`}
               >
                 {Helpers.toCapitalize(pokemon.types[0].type.name)}
               </Link>
               {pokemon.types[1] ? (
                 <Link
-                  className={`type-background  ${pokemon.types[1].type.name}-background`}
+                  className={`type-background  ${
+                    pokemon.types[1].type.name
+                  }-background`}
                   to={`/type/${pokemon.types[1].type.name}`}
                 >
                   {Helpers.toCapitalize(pokemon.types[1].type.name)}
@@ -117,13 +118,15 @@ const PokemonsList = ({ limit, offset }) => (
     {({ loading, error, data, fetchMore }) => {
       const hasMore = true;
       const infiniteLoader = (
-        <div className="infinite-loader" key='infinite-loader'>
-          <Spinner type="grow" color="success" key="infinite-loader-0"/>
-          <Spinner type="grow" color="danger" key="infinite-loader-1"/>
-          <Spinner type="grow" color="primary" key="infinite-loader-2"/>
-          <Spinner type="grow" color="warning" key="infinite-loader-3"/>
-        </div>);
-      const getOffset = (index) => {
+        <div className="infinite-loader" key="infinite-loader">
+          <Spinner type="grow" color="success" key="infinite-loader-1" />
+          <Spinner type="grow" color="danger" key="infinite-loader-2" />
+          <Spinner type="grow" color="secondary" key="infinite-loader-3" />
+          <Spinner type="grow" color="primary" key="infinite-loader-4" />
+          <Spinner type="grow" color="warning" key="infinite-loader-5" />
+        </div>
+      );
+      const getOffset = index => {
         // TODO: we should rewrite
         offset = index + Helpers.getPageSize();
         return offset;
@@ -134,9 +137,12 @@ const PokemonsList = ({ limit, offset }) => (
             offset: getOffset(offset)
           },
           updateQuery: (prev, { fetchMoreResult }) => {
-            if (!fetchMoreResult
-              || prev.getPokemons[prev.getPokemons.length - 1].id >= Helpers.getMaxPokemonId()) {
-             /* hasMore = false;
+            if (
+              !fetchMoreResult ||
+              prev.getPokemons[prev.getPokemons.length - 1].id >=
+                Helpers.getMaxPokemonId()
+            ) {
+              /* hasMore = false;
               infiniteLoader = <div>end</div>; */
               return prev;
             }
@@ -150,33 +156,26 @@ const PokemonsList = ({ limit, offset }) => (
         for (let i = 0; i < 8; i += 1) {
           loadingPrototype.push(
             <Col key={i} xs="12" sm="8" md="6" lg="4" xl="3">
-              <Card className="prototype">
-                <div className="card-img card-loading-animation" />
-                <CardBody>
-                  <CardTitle className="card-loading-animation" />
-                  <CardSubtitle className="card-loading-animation" />
-                  <CardText className="card-loading-animation" />
-                  <div className="card-button" />
-                </CardBody>
-              </Card>
+              <SmallSkeleton />
             </Col>
           );
         }
-        return (<Row className="justify-content-md-start justify-content-sm-around">
-          {loadingPrototype}
-        </Row>);
+        return (
+          <Row className="justify-content-md-start justify-content-sm-around">
+            {loadingPrototype}
+          </Row>
+        );
       }
       if (error) {
         return `${error}!`;
       }
-      
-      if(!loading) {
+
+      if (!loading) {
         const cols = data.getPokemons.map((poke, i) => (
-              <Col xs="12" sm="8" md="6" lg="4" xl="3" key={poke.id}>
-                <PokemonDetail id={poke.id} key={poke.id} index={i}/>
-              </Col>
-            )
-        );
+          <Col xs="12" sm="8" md="6" lg="4" xl="3" key={poke.id}>
+            <PokemonDetail id={poke.id} key={poke.id} index={i} />
+          </Col>
+        ));
         return (
           <InfiniteScroll
             pageStart={0}
@@ -197,7 +196,7 @@ const PokemonsList = ({ limit, offset }) => (
 );
 
 // get random Id
-const offset= random(0, Helpers.getMaxPokemonId() - Helpers.getPageSize());
+const offset = random(0, Helpers.getMaxPokemonId() - Helpers.getPageSize());
 
 const Pokemons = () => (
   <div id="pokemons">
