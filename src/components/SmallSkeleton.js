@@ -8,6 +8,7 @@ const SmallSkeleton = () => (
       <CardTitle className="card-loading-animation" />
       <CardSubtitle className="card-loading-animation" />
       <CardText className="card-loading-animation" />
+      <CardText className="card-loading-animation" />
       <div className="card-button card-loading-animation" />
     </CardBody>
   </Card>

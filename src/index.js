@@ -21,8 +21,8 @@ registerObserver(options, callback);
 
 // react-apollo gives us access to the client which should point to // our api endpoint which we built earlier.
 const client = new ApolloClient({
-  uri: 'http://10.128.240.30:4000/graphql/',
-  // uri: 'http://localhost:4000/graphql/',
+  // uri: 'http://10.128.240.30:4000/graphql/',
+  uri: 'http://localhost:4000/graphql/',
   request: operation => {
     operation.setContext({
       headers: {
