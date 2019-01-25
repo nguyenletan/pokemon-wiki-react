@@ -23,14 +23,14 @@ registerObserver(options, callback);
 const client = new ApolloClient({
   // uri: 'http://10.128.240.30:4000/graphql/',
   uri: 'https://pokemon-wiki-apollo.herokuapp.com/graphql',
-  // uri: 'https://pokemon-wiki-backend.netlify.com/graphql',
-  /* request: operation => {
+  // uri: "http://localhost:4000/graphql",
+  request: operation => {
     operation.setContext({
       headers: {
         authorization: `Bearer your-personal-access-token`
       }
     });
-  } */
+  }
 });
 
 render(
