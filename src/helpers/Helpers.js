@@ -145,7 +145,7 @@ class Helpers {
     }
   }
 
-  static getPageSize = () => 16;
+  static getPageSize = () => 8;
 }
 
 export default Helpers;
