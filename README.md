@@ -2,9 +2,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Demo
 
-[Surge Link](http://pokemon-apollo.surge.sh/)
-
 [Azure Link](https://pokemon-apollo.azurewebsites.net/)
+
+[Netlify Link](https://pokemon-apollo.netlify.com/)
+
+[Surge Link](http://pokemon-apollo.surge.sh/)
 
 ## Screenshot
 
