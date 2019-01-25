@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Demo
+
+[Surge Link](http://pokemon-apollo.surge.sh/)
+
+[Azure Link](https://pokemon-apollo.azurewebsites.net/)
+
 ## Screenshot
 
 ![](https://photo2.tinhte.vn/data/attachment-files/2019/01/4553048_screencapture-localhost-3000-pokemon-26-form-Alola-2019-01-23-12_56_52.png)
@@ -12,6 +18,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [Pokemon Wiki Apollo](https://github.com/nguyenletan/pokemon-wiki-apollo)
 [Pokemon Wiki Apolo Lambda Functio](https://github.com/nguyenletan/pokemon-wiki-apollo-lambda)
+[GraphQL Playground](https://pokemon-wiki-apollo.herokuapp.com/graphql)
+
 
 ## Available Scripts
 
