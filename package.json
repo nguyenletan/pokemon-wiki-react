@@ -1,7 +1,6 @@
 {
   "name": "pokemon-wiki-react",
-  "homepage" : "https://pokemon-apollo.azurewebsites.net/",
-
+  "homepage": "https://pokemon-apollo.azurewebsites.net/",
   "version": "0.3.0",
   "private": true,
   "precommit": "NODE_ENV=production lint-staged",

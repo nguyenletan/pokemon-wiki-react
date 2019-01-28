@@ -162,7 +162,7 @@ const NavItem = props => {
     >
       {({ loading, error, data }) => {
         if (loading) {
-          return (<span className="{htmlClass}" title="Go to pokemon"/>);
+          return <span className="{htmlClass}" title="Go to pokemon" />;
         }
         if (error) {
           return <div>`${error}`</div>;
@@ -171,7 +171,11 @@ const NavItem = props => {
         const pokemon = data.minimalIdentifier;
         const imgUrl = Helpers.getPokemonImgUrl(pokemon);
         return (
-          <Link to={`/pokemon/${pokemon.id}`} className={htmlClass} title={`Go to ${pokemon.name}`}>
+          <Link
+            to={`/pokemon/${pokemon.id}`}
+            className={htmlClass}
+            title={`Go to ${pokemon.name}`}
+          >
             <img className="pokemon-img" src={imgUrl} alt={pokemon.name} />
             <span className="pokemon-name">{pokemon.name}</span>
             <span className="pokemon-id">#{pokemon.id}</span>
@@ -395,11 +399,9 @@ const Weaknesses = props => {
           <li key={item.type} className="">
             <CardType type={item.type} />
             <span className={`effectiveness ${item.statusModifier}`}>
-              <strong>
-                {'=> '}
-                {item.effectiveness.toFixed(3) * 100}%
-              </strong>{' '}
-              damage
+              <span className="arrow-to-damage">{'==> '}</span>
+              <strong>{item.effectiveness.toFixed(3) * 100}%</strong>{' '}
+              <span className="damage-text">damage</span>
             </span>
           </li>
         ))}
@@ -422,11 +424,9 @@ const Resistances = props => {
           <li key={item.type} className="">
             <CardType type={item.type} />
             <span className={`effectiveness ${item.statusModifier}`}>
-              <strong>
-                {'=> '}
-                {item.effectiveness.toFixed(3) * 100}%
-              </strong>{' '}
-              damage
+              <span className="arrow-to-damage">{'==> '}</span>
+              <strong>{item.effectiveness.toFixed(3) * 100}%</strong>{' '}
+              <span className="damage-text">damage</span>
             </span>
           </li>
         ))}
@@ -600,22 +600,18 @@ const PokemonDetail = ({ id, form }) => (
               keyboard_backspace
             </i>
           </Link>
-          {pokemon.generation > 4 ||
-          (form !== null && form !== undefined) ? (
+          {pokemon.generation > 4 || (form !== null && form !== undefined) ? (
             <CardImg top src={imgSrc} alt={pokemon.name} />
           ) : (
-            <figure
-              className="card-video-top"
-              style={{ margin: '0 auto' }}
-            >
+            <figure className="card-video-top" style={{ margin: '0 auto' }}>
               <video
                 autoPlay
                 loop
-                id="pokemonVideoPlayer"
-                height="290"
+                className="pokemon-video-player"
                 title={`${pokemon.name} animated sprite`}
               >
                 <track kind="captions" />
+                <track kind="descriptions" />
                 <source src={videoSrc} type="video/mp4" />
               </video>
             </figure>
