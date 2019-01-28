@@ -611,7 +611,7 @@ const PokemonDetail = ({ id, form }) => (
                 title={`${pokemon.name} animated sprite`}
               >
                 <track kind="captions" />
-                <track kind="descriptions" />
+                <track kind="description" />
                 <source src={videoSrc} type="video/mp4" />
               </video>
             </figure>
