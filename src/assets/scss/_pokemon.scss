@@ -33,11 +33,15 @@
     }
     @media (max-width: 360px) {
       .pokemon-video-player {
-        height: 250px;
+        height: 240px;
       }
     }
 
-
+    @media (max-width: 320px) {
+      .pokemon-video-player {
+        height: 210px;
+      }
+    }
 
     .card-title {
       h1 {
