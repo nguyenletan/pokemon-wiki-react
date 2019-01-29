@@ -17,8 +17,27 @@
     .pokemon-video-player {
       max-width: 100%;
       width: auto;
-      height: 320px;
+      height: auto;
     }
+
+    @media (max-width: 1024px) {
+      .pokemon-video-player {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .pokemon-video-player {
+        height: 300px;
+      }
+    }
+    @media (max-width: 360px) {
+      .pokemon-video-player {
+        height: 250px;
+      }
+    }
+
+
 
     .card-title {
       h1 {

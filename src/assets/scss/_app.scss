@@ -50,9 +50,23 @@ textarea {
   }
 }
 
+.github-corner .octo-arm {
+  transform-origin: 130px 106px;
+}
+
 .github-corner:hover .octo-arm {
   animation: octocat-wave 560ms ease-in-out infinite;
-  transform-origin: 130px 106px;
+
+}
+
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
 }
 
 @keyframes octocat-wave {
@@ -78,17 +92,6 @@ textarea {
 
   100% {
     transform: rotate(0deg);
-  }
-}
-
-@media (max-width: 500px) {
-  .github-corner:hover .octo-arm {
-    animation: none;
-  }
-
-  .github-corner .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-    transform-origin: 130px 106px;
   }
 }
 
