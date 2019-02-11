@@ -36,7 +36,14 @@ const client = new ApolloClient({
 
 const rootElement = document.getElementById("root");
 
-if (rootElement.hasChildNodes()) {
+render(
+    <ApolloProvider client={client} connectToDevTools>
+      <App />
+    </ApolloProvider>,
+    rootElement
+  );
+
+/*if (rootElement.hasChildNodes()) {
   hydrate(
     <ApolloProvider client={client} connectToDevTools>
       <App />
@@ -50,7 +57,7 @@ if (rootElement.hasChildNodes()) {
     </ApolloProvider>,
     rootElement
   );
-}
+}*/
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
