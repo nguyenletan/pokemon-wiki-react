@@ -152,7 +152,7 @@ const Pokemons = props => {
               color="primary"
               className={isActive(3, genId) ? 'active' : ''}
             >
-              Generation III
+              Gen III
             </Button>
           </NavLink>
           <NavLink to="/pokemon-with-gen/4">
