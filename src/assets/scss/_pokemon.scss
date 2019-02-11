@@ -17,12 +17,12 @@
     .pokemon-video-player {
       max-width: 100%;
       width: auto;
-      height: auto;
+      max-height: 400px;
     }
 
     @media (max-width: 1024px) {
       .pokemon-video-player {
-        height: 400px;
+        max-height: 400px;
       }
     }
 
@@ -108,7 +108,7 @@
         text-decoration: none;
         margin-bottom: 1rem;
         transition: box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
-        padding-top: 5px;
+        padding-top: 6px;
         &:hover {
           box-shadow: rgba(40, 167, 69, 0.4) 0 12px 24px -8px;
           color: $success;
@@ -135,7 +135,7 @@
 
         .pokemon-img {
           border-radius: 50%;
-          margin-top: -7.5px;
+          margin-top: -8.5px;
           width: 40px;
           height: 40px;
           z-index: 2;

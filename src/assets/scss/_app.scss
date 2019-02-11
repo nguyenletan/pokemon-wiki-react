@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'dm', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont,
+  font-family: Nunito, 'dm', -apple-system, BlinkMacSystemFont,
     'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -17,7 +17,7 @@ code,
 input,
 button,
 textarea {
-  font-family: 'dm', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont,
+  font-family: Nunito, 'dm', -apple-system, BlinkMacSystemFont,
     'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif;
 }
@@ -33,74 +33,13 @@ summary,
 textarea {
   touch-action: manipulation;
 }
-.github-corner svg{
-  z-index: 99;
-  fill: $success;
-  color: rgb(255, 255, 255);
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  border-width: 0px;
-  border-style: initial;
-  border-color: initial;
-  border-image: initial;
-  text-decoration: none;
-  &:hover {
-    color: #fff;
-  }
-}
-
-.github-corner .octo-arm {
-  transform-origin: 130px 106px;
-}
-
-.github-corner:hover .octo-arm {
-  animation: octocat-wave 560ms ease-in-out infinite;
-
-}
-
-@media (max-width: 500px) {
-  .github-corner:hover .octo-arm {
-    animation: none;
-  }
-
-  .github-corner .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
-}
-
-@keyframes octocat-wave {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  20% {
-    transform: rotate(-25deg);
-  }
-
-  40% {
-    transform: rotate(10deg);
-  }
-
-  60% {
-    transform: rotate(-25deg);
-  }
-
-  80% {
-    transform: rotate(10deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
-}
 
 button {
   font-weight: 700;
 }
 
 .quotes {
-  font-family: 'dm', 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+  font-family: 'Nunito', 'Georgia', 'Times New Roman', serif;
   font-style: italic;
 }
 
@@ -111,10 +50,13 @@ button {
 }
 
 h1 {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   margin-bottom: 2rem;
   line-height: 2;
   color: $success;
-  text-transform: capitalize;
+  text-transform: uppercase;
   text-align: center;
   font-size: 4em;
   font-weight: 900;

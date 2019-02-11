@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { render, hydrate } from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import App from './App';
@@ -19,9 +19,10 @@ const callback = () => {
 
 registerObserver(options, callback);
 
+// uri: "http://localhost:4000/graphql",
+// uri: 'http://10.128.240.30:4000/graphql/',
 // react-apollo gives us access to the client which should point to // our api endpoint which we built earlier.
 const client = new ApolloClient({
-  // uri: 'http://10.128.240.30:4000/graphql/',
   uri: 'https://pokemon-wiki-apollo.herokuapp.com/graphql',
   // uri: "http://localhost:4000/graphql",
   request: operation => {
@@ -33,13 +34,23 @@ const client = new ApolloClient({
   }
 });
 
-render(
-  <ApolloProvider client={client} connectToDevTools>
-    <App />
-  </ApolloProvider>,
+const rootElement = document.getElementById("root");
 
-  document.getElementById('root')
-);
+if (rootElement.hasChildNodes()) {
+  hydrate(
+    <ApolloProvider client={client} connectToDevTools>
+      <App />
+    </ApolloProvider>,
+    rootElement
+  );
+} else {
+  render(
+    <ApolloProvider client={client} connectToDevTools>
+      <App />
+    </ApolloProvider>,
+    rootElement
+  );
+}
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA

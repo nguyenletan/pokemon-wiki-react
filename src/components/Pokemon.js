@@ -72,32 +72,7 @@ const GET_POKEMON_QUERY = gql`
         maxcp
       }
     }
-  }
-`;
 
-const GET_MINI_POKEMON_QUERY = gql`
-  query GetMiniPokemonFromHub($id: Int) {
-    minimalIdentifier: getPokemonById(id: $id) {
-      id
-      name
-      form
-      forms {
-        name
-        value
-      }
-      type1
-      type2
-      atk
-      sta
-      def
-      generation
-      maxcp
-    }
-  }
-`;
-// language=GraphQL
-const GET_MOVESETS_QUERY = gql`
-  query GetMovesets($id: Int) {
     getMoveSets(id: $id) {
       isQuickMoveBoostedByWeather
       isChargeMoveBoostedByWeather
@@ -143,6 +118,27 @@ const GET_MOVESETS_QUERY = gql`
         pokemonId
         moveId
       }
+    }
+  }
+`;
+
+const GET_MINI_POKEMON_QUERY = gql`
+  query GetMiniPokemonFromHub($id: Int) {
+    minimalIdentifier: getPokemonById(id: $id) {
+      id
+      name
+      form
+      forms {
+        name
+        value
+      }
+      type1
+      type2
+      atk
+      sta
+      def
+      generation
+      maxcp
     }
   }
 `;
@@ -264,44 +260,22 @@ const CardTypeImg = props => {
   );
 };
 
-const MoveSets = ({ id, pokemon }) => (
-  <Query
-    query={GET_MOVESETS_QUERY}
-    variables={{ id }}
-    fetchPolicy="cache-and-network"
-  >
-    {({ loading, error, data }) => {
-      if (loading) {
-        return 'Loading...';
-      }
-      if (error) {
-        return <div>`Error: ${error}!`</div>;
-      }
-      if (!loading) {
-        const movesets = data.getMoveSets;
-        if (
-          movesets === null ||
-          movesets === undefined ||
-          movesets.length === 0
-        ) {
-          return null;
-        }
-        const bestMoveSet = Helpers.getBestMoveSet(movesets);
-        return (
-          <Fragment>
-            <strong>
-              {pokemon.name} {pokemon.form || ''}
-            </strong>{' '}
-            best moveset is <strong>{bestMoveSet.quickMove.name}</strong> and{' '}
-            <strong>{bestMoveSet.chargeMove.name}</strong>, with a cycle (weave)
-            DPS of {bestMoveSet.weaveDPS.toFixed(2)} damage per second.
-          </Fragment>
-        );
-      }
-      return null;
-    }}
-  </Query>
-);
+const MoveSets = ({ pokemon, movesets }) => {
+  if (movesets === null || movesets === undefined || movesets.length === 0) {
+    return null;
+  }
+  const bestMoveSet = Helpers.getBestMoveSet(movesets);
+  return (
+    <Fragment>
+      <strong>
+        {pokemon.name} {pokemon.form || ''}
+      </strong>{' '}
+      best moveset is <strong>{bestMoveSet.quickMove.name}</strong> and{' '}
+      <strong>{bestMoveSet.chargeMove.name}</strong>, with a cycle (weave) DPS
+      of {bestMoveSet.weaveDPS.toFixed(2)} damage per second.
+    </Fragment>
+  );
+};
 
 const Stats = props => {
   const xs = 12;
@@ -579,6 +553,7 @@ const PokemonDetail = ({ id, form }) => (
         return <div>`${error}`</div>;
       }
       const pokemon = data.getPokemonById;
+      const movesets = data.getMoveSets;
 
       if (pokemon !== null) {
         Helpers.normalizePokemon(pokemon);
@@ -634,7 +609,7 @@ const PokemonDetail = ({ id, form }) => (
             <Information pokemon={pokemon} />
 
             <CardText className="moveset">
-              <MoveSets id={pokemon.id} pokemon={pokemon} />
+              <MoveSets movesets={movesets} pokemon={pokemon} />
             </CardText>
 
             <Row>

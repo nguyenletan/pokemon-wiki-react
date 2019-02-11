@@ -1,0 +1,196 @@
+#pokemons-gen {
+  width: 100%;
+  margin: 0 auto;
+  .title {
+    margin-left: 1rem;
+  }
+
+  .generation-group {
+    width: 100%;
+    display: flex;
+    margin-bottom: 3rem;
+
+    justify-content: center;
+    a {
+      margin-right: 1rem;
+    }
+    .btn {
+      font-weight: $font-weight-bold;
+      width: 100%;
+      max-width: 140px;
+      border-width: 2px;
+    }
+  }
+
+  img {
+    width: 93.5%;
+    margin: 0 auto;
+  }
+  .pokemon-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+
+    padding-left: 0;
+    flex-wrap: wrap;
+    margin-left: 0;
+
+    li a {
+      text-decoration: none;
+      // border: 1px solid $success;
+      border-radius: 0.35rem;
+      // box-shadow: 0rem 0rem 0.5rem rgba(40, 167, 69, 0.5);
+      margin-left: 0.7rem;
+      margin-right: 0.7rem;
+      margin-bottom: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      justify-items: flex-start;
+      height: 389px;
+      width: 250px;
+      padding: 0.5rem;
+      transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      // background-color: rgba(40, 167, 69, 0.01);
+      cursor: pointer;
+
+      &:hover {
+        // box-shadow: 0.5rem 0.3rem 2rem rgba(40, 167, 69, 0.4);
+        background-color: #fff;
+      }
+
+      &.gen-1 {
+        border: 1px solid $success;
+        box-shadow: 0rem 0rem 0.5rem rgba(40, 167, 69, 0.5);
+        background-color: rgba(40, 167, 69, 0.01);
+        &:hover {
+          box-shadow: 0.5rem 0.3rem 2rem rgba(40, 167, 69, 0.4);
+        }
+      }
+      &.gen-2 {
+        border: 1px solid $danger;
+        box-shadow: 0rem 0rem 0.5rem rgba(220, 43, 69, 0.3);
+        background-color: rgba(220, 43, 69, 0.01);
+        &:hover {
+          box-shadow: 0.5rem 0.3rem 2rem rgba(220, 43, 69, 0.3);
+        }
+      }
+      &.gen-3 {
+        border: 1px solid $primary;
+        box-shadow: 0rem 0rem 0.5rem rgba(0, 123, 255, 0.5);
+        background-color: rgba(0, 123, 255, 0.01);
+        &:hover {
+          box-shadow: 0.5rem 0.3rem 2rem rgba(0, 123, 255, 0.4);
+        }
+      }
+      &.gen-4 {
+        border: 1px solid $secondary;
+        box-shadow: 0rem 0rem 0.5rem rgba(108, 117, 125, 0.5);
+        background-color: rgba(108, 117, 125, 0.01);
+        &:hover {
+          box-shadow: 0.5rem 0.3rem 2rem rgba(108, 117, 125, 0.4);
+        }
+      }
+      &.gen-5 {
+        border: 1px solid $warning;
+        box-shadow: 0rem 0rem 0.5rem rgba(255, 193, 7, 0.5);
+        background-color: rgba(255, 193, 7, 0.01);
+        &:hover {
+          box-shadow: 0.5rem 0.3rem 2rem rgba(255, 193, 7, 0.4);
+        }
+      }
+      &.gen-6 {
+        border: 1px solid $info;
+        box-shadow: 0rem 0rem 0.5rem rgba(23, 162, 184, 0.5);
+        background-color: rgba(23, 162, 184, 0.01);
+        &:hover {
+          box-shadow: 0.5rem 0.3rem 2rem rgba(23, 162, 184, 0.4);
+        }
+      }
+      &.gen-7 {
+        border: 1px solid $dark;
+        box-shadow: 0rem 0rem 0.5rem rgba(52, 58, 64, 0.5);
+        background-color: rgba(52, 58, 64, 0.01);
+        &:hover {
+          box-shadow: 0.5rem 0.3rem 2rem rgba(52, 58, 64, 0.4);
+        }
+      }
+
+      .pokemon-name {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.85rem;
+        display: block;
+        line-height: 1;
+
+        &.top {
+          margin-left: 0.5rem;
+        }
+
+        &.bottom {
+          margin-right: 0.5rem;
+          text-align: right;
+        }
+      }
+
+      .card-icon {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.85rem;
+        line-height: 1;
+        display: block;
+
+        &.top {
+          margin-left: 0.5rem;
+          margin-top: -0.1rem;
+        }
+
+        &.bottom {
+          margin-right: 0.5rem;
+          margin-bottom: -0.1rem;
+          text-align: right;
+        }
+      }
+    }
+    &.gen-2 {
+      border: 1px solid $success;
+
+      .pokemon-name {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.85rem;
+        display: block;
+        line-height: 1;
+
+        &.top {
+          margin-left: 0.5rem;
+        }
+
+        &.bottom {
+          margin-right: 0.5rem;
+          text-align: right;
+        }
+      }
+
+      .card-icon {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.85rem;
+        line-height: 1;
+        display: block;
+
+        &.top {
+          margin-left: 0.5rem;
+          margin-top: -0.1rem;
+        }
+
+        &.bottom {
+          margin-right: 0.5rem;
+          margin-bottom: -0.1rem;
+          text-align: right;
+        }
+      }
+    }
+  }
+}

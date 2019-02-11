@@ -3,7 +3,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
-import { random } from 'lodash';
+// import { random } from 'lodash';
 
 import {
   Button,
@@ -195,13 +195,13 @@ const PokemonsList = ({ limit, offset }) => (
 );
 
 // get random Id
-const offset = random(0, Helpers.getMaxPokemonId() - Helpers.getPageSize());
+// const offset = random(0, Helpers.getMaxPokemonId() - Helpers.getPageSize());
 
 const Pokemons = () => (
   <div id="pokemons">
     <h1>Pokémons</h1>
     <div className="container-fluid">
-      <PokemonsList limit={Helpers.getPageSize()} offset={offset} />
+      <PokemonsList limit={Helpers.getPageSize()} offset={0} />
     </div>
   </div>
 );
