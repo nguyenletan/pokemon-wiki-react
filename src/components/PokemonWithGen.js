@@ -134,7 +134,7 @@ const Pokemons = props => {
               color="success"
               className={isActive(1, genId) ? 'active' : ''}
             >
-              Generation I
+              Gen I
             </Button>
           </NavLink>
           <NavLink to="/pokemon-with-gen/2">
@@ -143,7 +143,7 @@ const Pokemons = props => {
               color="danger"
               className={isActive(2, genId) ? 'active' : ''}
             >
-              Generation II
+              Gen II
             </Button>
           </NavLink>
           <NavLink to="/pokemon-with-gen/3">
@@ -161,7 +161,7 @@ const Pokemons = props => {
               color="secondary"
               className={isActive(4, genId) ? 'active' : ''}
             >
-              Generation IV
+              Gen IV
             </Button>
           </NavLink>
           <NavLink to="/pokemon-with-gen/5">
@@ -170,7 +170,7 @@ const Pokemons = props => {
               color="warning"
               className={isActive(5, genId) ? 'active' : ''}
             >
-              Generation V
+              Gen V
             </Button>
           </NavLink>
           <NavLink to="/pokemon-with-gen/6">
@@ -179,7 +179,7 @@ const Pokemons = props => {
               color="info"
               className={isActive(6, genId) ? 'active' : ''}
             >
-              Generation VI
+              Gen VI
             </Button>
           </NavLink>
           <NavLink to="/pokemon-with-gen/7">
@@ -188,7 +188,7 @@ const Pokemons = props => {
               color="dark"
               className={isActive(7, genId) ? 'active' : ''}
             >
-              Generation VII
+              Gen VII
             </Button>
           </NavLink>
         </ButtonGroup>
