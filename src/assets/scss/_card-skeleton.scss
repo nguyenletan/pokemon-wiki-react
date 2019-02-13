@@ -1,0 +1,45 @@
+.card-skeleton {
+  border: 1px solid $success;
+  border-radius: 0.35rem;
+  box-shadow: 0rem 0rem 0.5rem rgba(40, 167, 69, 0.5);
+  height: 389px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-items: flex-start;
+  transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  background-color: rgba(40, 167, 69, 0.01);
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+  margin-bottom: 1.4rem;
+  .card-img {
+    width: 200px;
+    height: 200px;
+    background-color: $fake-background2;
+    border-radius: 0.35rem;
+    margin: 0 auto;
+  }
+
+  .top-icon {
+    width: 50px;
+    height: 50px;
+    background-color: $fake-background2;
+    border-radius: 50%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    display: block;
+
+  }
+  .bottom-icon {
+    width: 50px;
+    height: 50px;
+    background-color: $fake-background2;
+    border-radius: 50%;
+    text-align: right;
+    display: block;
+    margin-left: 182px;
+    margin-bottom: 1rem;
+  }
+
+}
