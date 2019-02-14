@@ -1,11 +1,13 @@
 import React from 'react';
-import { render, hydrate } from 'react-dom';
+import { render } from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './index.scss';
 
+
+global.fetch = fetch;
 const { registerObserver } = require('react-perf-devtool');
 
 const options = {
@@ -36,6 +38,7 @@ const client = new ApolloClient({
 
 const rootElement = document.getElementById("root");
 
+
 render(
     <ApolloProvider client={client} connectToDevTools>
       <App />
@@ -43,21 +46,7 @@ render(
     rootElement
   );
 
-/*if (rootElement.hasChildNodes()) {
-  hydrate(
-    <ApolloProvider client={client} connectToDevTools>
-      <App />
-    </ApolloProvider>,
-    rootElement
-  );
-} else {
-  render(
-    <ApolloProvider client={client} connectToDevTools>
-      <App />
-    </ApolloProvider>,
-    rootElement
-  );
-}*/
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
