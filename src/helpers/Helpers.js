@@ -86,6 +86,20 @@ class Helpers {
       : `https://db.pokemongohub.net/images/official/full/${imgId()}.png`;
   };
 
+  static getPokemonImgUrlWithoutCheckForm = pokemon => {
+    const imgId = () => {
+      if (pokemon.id < 10) {
+        return `00${pokemon.id}`;
+      }
+      if (pokemon.id < 100) {
+        return `0${pokemon.id}`;
+      }
+      return `${pokemon.id}`;
+    };
+
+    return `https://db.pokemongohub.net/images/official/full/${imgId()}.png`;
+  };
+
   static getFormImgUrl = (pokemonId, formValue) => {
     const imgId = () => {
       if (pokemonId < 10) {
@@ -115,8 +129,19 @@ class Helpers {
     return pokemon;
   };
 
+  static normalizePokemon2 = pokemon => {
+    // normalize family
+    // normalize family
+    const poke = pokemon;
+    if (pokemon.id !== pokemon.index) {
+      poke.id = pokemon.index || pokemon.id;
+    }
+    return poke;
+  };
+
   static getPokeName = pokemon => {
     const { name, form } = pokemon;
+
     return form !== null && form !== undefined && form !== ''
       ? `${name} ${form}`
       : name;
@@ -145,7 +170,51 @@ class Helpers {
     }
   }
 
+  static romanize(num) {
+    const digits = String(+num).split('');
+
+    const key = [
+      '',
+      'C',
+      'CC',
+      'CCC',
+      'CD',
+      'D',
+      'DC',
+      'DCC',
+      'DCCC',
+      'CM',
+      '',
+      'X',
+      'XX',
+      'XXX',
+      'XL',
+      'L',
+      'LX',
+      'LXX',
+      'LXXX',
+      'XC',
+      '',
+      'I',
+      'II',
+      'III',
+      'IV',
+      'V',
+      'VI',
+      'VII',
+      'VIII',
+      'IX'
+    ];
+
+    let roman = '';
+
+    let i = 3;
+    while (i--) roman = (key[+digits.pop() + i * 10] || '') + roman;
+    return Array(+digits.join('') + 1).join('M') + roman;
+  }
+
   static getPageSize = () => 16;
+  
 }
 
 export default Helpers;

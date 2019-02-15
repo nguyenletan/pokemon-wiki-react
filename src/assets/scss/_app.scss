@@ -1,22 +1,37 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'dm', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: Nunito, 'dm', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   font-kerning: auto;
+  font-variant: tabular-nums;
+  font-variant-ligatures: common-ligatures;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 code,
 input,
 button,
 textarea {
-  font-family: 'dm','IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: Nunito, 'dm', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+input[role='button'],
+a,
+area,
+button,
+input:not([type='range']),
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
 }
 
 button {
@@ -24,8 +39,7 @@ button {
 }
 
 .quotes {
-  font-family: 'dm', 'IBM Plex Serif', 'Georgia', 'Times New Roman',
-    serif;
+  font-family: 'Nunito', 'Georgia', 'Times New Roman', serif;
   font-style: italic;
 }
 
@@ -36,17 +50,19 @@ button {
 }
 
 h1 {
-  font-family: 'IBM Plex Sans', -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  line-height: 2;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  margin-bottom: 3rem;
+  line-height: 1;
+  margin-top: 2.5rem;
   color: $success;
-  font-size: 3.5rem;
   text-transform: uppercase;
   text-align: center;
-  text-shadow: 2px 2px 0 #fff, 3px 3px 0 #ddd;
+  font-size: 3em;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  // text-shadow: 2px 2px 0 #fff, 3px 3px 0 #ddd;
 }
 
 i.arrow-back {

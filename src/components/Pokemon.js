@@ -72,32 +72,7 @@ const GET_POKEMON_QUERY = gql`
         maxcp
       }
     }
-  }
-`;
 
-const GET_MINI_POKEMON_QUERY = gql`
-  query GetMiniPokemonFromHub($id: Int) {
-    minimalIdentifier: getPokemonById(id: $id) {
-      id
-      name
-      form
-      forms {
-        name
-        value
-      }
-      type1
-      type2
-      atk
-      sta
-      def
-      generation
-      maxcp
-    }
-  }
-`;
-// language=GraphQL
-const GET_MOVESETS_QUERY = gql`
-  query GetMovesets($id: Int) {
     getMoveSets(id: $id) {
       isQuickMoveBoostedByWeather
       isChargeMoveBoostedByWeather
@@ -147,6 +122,27 @@ const GET_MOVESETS_QUERY = gql`
   }
 `;
 
+const GET_MINI_POKEMON_QUERY = gql`
+  query GetMiniPokemonFromHub($id: Int) {
+    minimalIdentifier: getPokemonById(id: $id) {
+      id
+      name
+      form
+      forms {
+        name
+        value
+      }
+      type1
+      type2
+      atk
+      sta
+      def
+      generation
+      maxcp
+    }
+  }
+`;
+
 // const history = createBrowserHistory();
 
 const NavItem = props => {
@@ -162,7 +158,7 @@ const NavItem = props => {
     >
       {({ loading, error, data }) => {
         if (loading) {
-          return (<span className="{htmlClass}" title="Go to pokemon"/>);
+          return <span className="{htmlClass}" title="Go to pokemon" />;
         }
         if (error) {
           return <div>`${error}`</div>;
@@ -171,7 +167,11 @@ const NavItem = props => {
         const pokemon = data.minimalIdentifier;
         const imgUrl = Helpers.getPokemonImgUrl(pokemon);
         return (
-          <Link to={`/pokemon/${pokemon.id}`} className={htmlClass} title={`Go to ${pokemon.name}`}>
+          <Link
+            to={`/pokemon/${pokemon.id}`}
+            className={htmlClass}
+            title={`Go to ${pokemon.name}`}
+          >
             <img className="pokemon-img" src={imgUrl} alt={pokemon.name} />
             <span className="pokemon-name">{pokemon.name}</span>
             <span className="pokemon-id">#{pokemon.id}</span>
@@ -260,44 +260,22 @@ const CardTypeImg = props => {
   );
 };
 
-const MoveSets = ({ id, pokemon }) => (
-  <Query
-    query={GET_MOVESETS_QUERY}
-    variables={{ id }}
-    fetchPolicy="cache-and-network"
-  >
-    {({ loading, error, data }) => {
-      if (loading) {
-        return 'Loading...';
-      }
-      if (error) {
-        return <div>`Error: ${error}!`</div>;
-      }
-      if (!loading) {
-        const movesets = data.getMoveSets;
-        if (
-          movesets === null ||
-          movesets === undefined ||
-          movesets.length === 0
-        ) {
-          return null;
-        }
-        const bestMoveSet = Helpers.getBestMoveSet(movesets);
-        return (
-          <Fragment>
-            <strong>
-              {pokemon.name} {pokemon.form || ''}
-            </strong>{' '}
-            best moveset is <strong>{bestMoveSet.quickMove.name}</strong> and{' '}
-            <strong>{bestMoveSet.chargeMove.name}</strong>, with a cycle (weave)
-            DPS of {bestMoveSet.weaveDPS.toFixed(2)} damage per second.
-          </Fragment>
-        );
-      }
-      return null;
-    }}
-  </Query>
-);
+const MoveSets = ({ pokemon, movesets }) => {
+  if (movesets === null || movesets === undefined || movesets.length === 0) {
+    return null;
+  }
+  const bestMoveSet = Helpers.getBestMoveSet(movesets);
+  return (
+    <Fragment>
+      <strong>
+        {pokemon.name} {pokemon.form || ''}
+      </strong>{' '}
+      best moveset is <strong>{bestMoveSet.quickMove.name}</strong> and{' '}
+      <strong>{bestMoveSet.chargeMove.name}</strong>, with a cycle (weave) DPS
+      of {bestMoveSet.weaveDPS.toFixed(2)} damage per second.
+    </Fragment>
+  );
+};
 
 const Stats = props => {
   const xs = 12;
@@ -395,11 +373,9 @@ const Weaknesses = props => {
           <li key={item.type} className="">
             <CardType type={item.type} />
             <span className={`effectiveness ${item.statusModifier}`}>
-              <strong>
-                {'=> '}
-                {item.effectiveness.toFixed(3) * 100}%
-              </strong>{' '}
-              damage
+              <span className="arrow-to-damage">{'==> '}</span>
+              <strong>{item.effectiveness.toFixed(3) * 100}%</strong>{' '}
+              <span className="damage-text">damage</span>
             </span>
           </li>
         ))}
@@ -422,11 +398,9 @@ const Resistances = props => {
           <li key={item.type} className="">
             <CardType type={item.type} />
             <span className={`effectiveness ${item.statusModifier}`}>
-              <strong>
-                {'=> '}
-                {item.effectiveness.toFixed(3) * 100}%
-              </strong>{' '}
-              damage
+              <span className="arrow-to-damage">{'==> '}</span>
+              <strong>{item.effectiveness.toFixed(3) * 100}%</strong>{' '}
+              <span className="damage-text">damage</span>
             </span>
           </li>
         ))}
@@ -579,6 +553,7 @@ const PokemonDetail = ({ id, form }) => (
         return <div>`${error}`</div>;
       }
       const pokemon = data.getPokemonById;
+      const movesets = data.getMoveSets;
 
       if (pokemon !== null) {
         Helpers.normalizePokemon(pokemon);
@@ -600,22 +575,18 @@ const PokemonDetail = ({ id, form }) => (
               keyboard_backspace
             </i>
           </Link>
-          {pokemon.generation > 4 ||
-          (form !== null && form !== undefined) ? (
+          {pokemon.generation > 4 || (form !== null && form !== undefined) ? (
             <CardImg top src={imgSrc} alt={pokemon.name} />
           ) : (
-            <figure
-              className="card-video-top"
-              style={{ margin: '0 auto' }}
-            >
+            <figure className="card-video-top" style={{ margin: '0 auto' }}>
               <video
                 autoPlay
                 loop
-                id="pokemonVideoPlayer"
-                height="290"
+                className="pokemon-video-player"
                 title={`${pokemon.name} animated sprite`}
               >
                 <track kind="captions" />
+                <track kind="description" />
                 <source src={videoSrc} type="video/mp4" />
               </video>
             </figure>
@@ -638,7 +609,7 @@ const PokemonDetail = ({ id, form }) => (
             <Information pokemon={pokemon} />
 
             <CardText className="moveset">
-              <MoveSets id={pokemon.id} pokemon={pokemon} />
+              <MoveSets movesets={movesets} pokemon={pokemon} />
             </CardText>
 
             <Row>

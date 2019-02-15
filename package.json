@@ -1,6 +1,7 @@
 {
   "name": "pokemon-wiki-react",
-  "version": "0.1.0",
+  "homepage": "https://pokemon-apollo.azurewebsites.net/",
+  "version": "0.3.0",
   "private": true,
   "precommit": "NODE_ENV=production lint-staged",
   "dependencies": {
@@ -60,5 +61,8 @@
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
     "pretty-quick": "^1.10.0"
+  },
+  "reactSnapshot": {
+    "snapshotDelay": 300
   }
 }
