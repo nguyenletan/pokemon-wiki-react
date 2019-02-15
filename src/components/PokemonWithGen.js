@@ -86,7 +86,7 @@ const PokemonsList = ({ gen }) => (
       // waiting query executing
       if (loading) {
         const loadingPrototype = [];
-        for (let i = 0; i < 8; i += 1) {
+        for (let i = 0; i < 16; i += 1) {
           loadingPrototype.push(
             <li key={i}>
               <CardSkeleton />
