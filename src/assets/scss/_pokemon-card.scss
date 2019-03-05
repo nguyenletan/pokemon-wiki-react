@@ -133,6 +133,7 @@
         &.bottom {
           margin-right: 0.5rem;
           text-align: right;
+          transform: rotateX(180deg);
         }
       }
 
@@ -152,6 +153,7 @@
           margin-right: 0.5rem;
           margin-bottom: -0.1rem;
           text-align: right;
+          transform: rotateX(180deg);
         }
       }
     }
