@@ -147,7 +147,7 @@ class Helpers {
       : name;
   };
 
-  static getMaxPokemonId = () => 802;
+  static getMaxPokemonId = () => 809;
 
   static getMaxPokeMonIdFofGeneration(generation) {
     switch (generation) {
@@ -164,7 +164,7 @@ class Helpers {
       case 6:
         return 721;
       case 7:
-        return 802;
+        return 809;
       default:
         return 0;
     }
