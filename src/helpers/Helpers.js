@@ -58,7 +58,7 @@ class Helpers {
     if (pokemon.form !== null && pokemon.form !== undefined) {
       name = `${name}_${pokemon.form}`;
     }
-    return `https://db.pokemongohub.net/videos/normal/${name}.mp4`;
+    return `https://db.pokemongohub.net/videos/${name}.mp4`;
   }
 
   static getGenerationById(id) {
