@@ -158,13 +158,23 @@ const NavItem = props => {
     >
       {({ loading, error, data }) => {
         if (loading) {
-          return <span className="{htmlClass}" title="Go to pokemon" />;
+          return <span className="{htmlClass}" title="Go to pokemon"/>;
         }
         if (error) {
           return <div>`${error}`</div>;
         }
-
+        
         const pokemon = data.minimalIdentifier;
+        if (!pokemon) {
+          return (
+            <Link style={{visibility: "hidden"}}
+              to="/pokemon/0"
+              className={htmlClass}
+              title=""
+          >
+          </Link>
+          );
+        }
         const imgUrl = Helpers.getPokemonImgUrl(pokemon);
         return (
           <Link
@@ -172,7 +182,7 @@ const NavItem = props => {
             className={htmlClass}
             title={`Go to ${pokemon.name}`}
           >
-            <img className="pokemon-img" src={imgUrl} alt={pokemon.name} />
+            <img className="pokemon-img" src={imgUrl} alt={pokemon.name}/>
             <span className="pokemon-name">{pokemon.name}</span>
             <span className="pokemon-id">#{pokemon.id}</span>
           </Link>
@@ -184,14 +194,14 @@ const NavItem = props => {
 
 const Navigation = props => {
   const { pokemon } = props;
-
+  
   const prevId = pokemon.id > 1 ? pokemon.id - 1 : 0;
   const nextId = pokemon.id < Helpers.getMaxPokemonId() ? pokemon.id + 1 : 0;
-
+  
   return (
     <nav className="navigation">
-      <NavItem id={prevId} isPrev />
-      <NavItem id={nextId} isPrev={false} />
+      <NavItem id={prevId} isPrev/>
+      <NavItem id={nextId} isPrev={false}/>
     </nav>
   );
 };
@@ -218,7 +228,7 @@ const CardTypeImg = props => {
     const typeName =
       pokemon.type1.charAt(0).toUpperCase() + pokemon.type1.substr(1);
     const typeImgSrc = Helpers.getTypeImgUrl(typeName);
-
+    
     cardTypeImage1 = (
       <Link to={`/type/${pokemon.type1}`} className="icon-type-wrapper">
         <img
@@ -232,12 +242,12 @@ const CardTypeImg = props => {
       </Link>
     );
   }
-
+  
   if (pokemon.type2) {
     const typeName =
       pokemon.type2.charAt(0).toUpperCase() + pokemon.type2.substr(1);
     const typeImgSrc = Helpers.getTypeImgUrl(typeName);
-
+    
     cardTypeImage2 = (
       <Link to={`/type/${pokemon.type2}`} className="icon-type-wrapper">
         <img
@@ -251,7 +261,7 @@ const CardTypeImg = props => {
       </Link>
     );
   }
-
+  
   return (
     <Fragment>
       {cardTypeImage1}
@@ -292,7 +302,7 @@ const Stats = props => {
   } else {
     category = 'Non-Legendary';
   }
-
+  
   return (
     <Fragment>
       <Row className="stats-row">
@@ -332,7 +342,7 @@ const Stats = props => {
           <strong>Stamina: </strong>
           {pokemon.sta}
         </Col>
-
+        
         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
           <strong>Base Catch rate: </strong>
           {pokemon.baseCaptureRate.toFixed(2)}
@@ -360,9 +370,9 @@ const Stats = props => {
 
 const Weaknesses = props => {
   const { typeChart } = props;
-
+  
   const weaknessItems = typeChart.filter(item => item.status === 'dis');
-
+  
   return (
     <Fragment>
       <p>
@@ -371,7 +381,7 @@ const Weaknesses = props => {
       <ul className="weakness-list">
         {_.orderBy(weaknessItems, ['effectiveness'], ['desc']).map(item => (
           <li key={item.type} className="">
-            <CardType type={item.type} />
+            <CardType type={item.type}/>
             <span className={`effectiveness ${item.statusModifier}`}>
               <span className="arrow-to-damage">{'==> '}</span>
               <strong>{item.effectiveness.toFixed(3) * 100}%</strong>{' '}
@@ -387,7 +397,7 @@ const Weaknesses = props => {
 const Resistances = props => {
   const { typeChart } = props;
   const resistanceItems = typeChart.filter(item => item.status === 'adv');
-
+  
   return (
     <Fragment>
       <p>
@@ -396,7 +406,7 @@ const Resistances = props => {
       <ul className="resistance-list">
         {_.orderBy(resistanceItems, ['effectiveness'], ['asc']).map(item => (
           <li key={item.type} className="">
-            <CardType type={item.type} />
+            <CardType type={item.type}/>
             <span className={`effectiveness ${item.statusModifier}`}>
               <span className="arrow-to-damage">{'==> '}</span>
               <strong>{item.effectiveness.toFixed(3) * 100}%</strong>{' '}
@@ -419,7 +429,7 @@ const Family = props => {
   ) {
     return null;
   }
-
+  
   const members = family.map((member, index) => {
     const imgUrl = Helpers.getPokemonImgUrl(member);
     const name = Helpers.getPokeName(member);
@@ -439,7 +449,7 @@ const Family = props => {
           <span className={`card-icon top ${aceClassNameColors[index % 2]}`}>
             {aceIcons[index % 4]}
           </span>
-          <img src={imgUrl} alt={name} />
+          <img src={imgUrl} alt={name}/>
           <span
             className={`font-weight-bold text-center ${
               aceClassNameColors[index % 2]
@@ -486,11 +496,14 @@ const Information = props => {
             {Helpers.toCapitalize(pokemon.type2)}
           </span>
         ) : null}{' '}
-        type Pokemon with a max CP of {pokemon.maxcp}, {pokemon.atk} attack,{' '}
+        type Pokemon with a max CP
+        of {pokemon.maxcp}, {pokemon.atk} attack,{' '}
         {pokemon.def} defense and {pokemon.sta} stamina in Pokemon GO. It was
-        originally found in the {Helpers.getGenerationName(pokemon.generation)}{' '}
+        originally found in the {Helpers.getGenerationName(
+        pokemon.generation)}{' '}
         region (Gen {pokemon.generation}). {pokemon.name} is vulnerable to{' '}
-        {Helpers.arrayToString(Helpers.getVulnerableTypes(pokemon.typeChart))}{' '}
+        {Helpers.arrayToString(
+          Helpers.getVulnerableTypes(pokemon.typeChart))}{' '}
         type moves. {pokemon.name} is boosted by{' '}
         {Helpers.arrayToString(pokemon.weatherInfluences)} weather.
       </CardText>
@@ -506,11 +519,11 @@ const Information = props => {
 
 const Forms = props => {
   const { pokemon } = props;
-
+  
   if (pokemon.forms === null || pokemon.forms.length <= 1) {
     return null;
   }
-
+  
   const formList = pokemon.forms.map(form => {
     const linkUrl =
       form.value === ''
@@ -528,7 +541,7 @@ const Forms = props => {
       </li>
     );
   });
-
+  
   return (
     <p className="forms">
       <span className="title">
@@ -547,20 +560,20 @@ const PokemonDetail = ({ id, form }) => (
   >
     {({ loading, error, data }) => {
       if (loading) {
-        return <BigSkeleton />;
+        return <BigSkeleton/>;
       }
       if (error) {
         return <div>`${error}`</div>;
       }
       const pokemon = data.getPokemonById;
       const movesets = data.getMoveSets;
-
+      
       if (pokemon !== null) {
         Helpers.normalizePokemon(pokemon);
       }
       const imgSrc = Helpers.getPokemonImgUrl(pokemon);
       const videoSrc = Helpers.getVideoURL(pokemon);
-
+      
       return (
         <Card className="pokemon-detail">
           <Link to="/" title="Go back Home Page">
@@ -576,7 +589,7 @@ const PokemonDetail = ({ id, form }) => (
             </i>
           </Link>
           {pokemon.generation > 4 || (form !== null && form !== undefined) ? (
-            <CardImg top src={imgSrc} alt={pokemon.name} />
+            <CardImg top src={imgSrc} alt={pokemon.name}/>
           ) : (
             <figure className="card-video-top" style={{ margin: '0 auto' }}>
               <video
@@ -585,9 +598,9 @@ const PokemonDetail = ({ id, form }) => (
                 className="pokemon-video-player"
                 title={`${pokemon.name} animated sprite`}
               >
-                <track kind="captions" />
-                <track kind="description" />
-                <source src={videoSrc} type="video/mp4" />
+                <track kind="captions"/>
+                <track kind="description"/>
+                <source src={videoSrc} type="video/mp4"/>
               </video>
             </figure>
           )}
@@ -597,31 +610,31 @@ const PokemonDetail = ({ id, form }) => (
                 {pokemon.id}.{pokemon.name} {form || ''}
               </h1>
             </CardTitle>
-            <Navigation pokemon={pokemon} />
+            <Navigation pokemon={pokemon}/>
             <CardSubtitle>
-              <CardTypeImg pokemon={pokemon} />
+              <CardTypeImg pokemon={pokemon}/>
             </CardSubtitle>
-
-            <Forms pokemon={pokemon} />
-
-            <Stats pokemon={pokemon} />
-
-            <Information pokemon={pokemon} />
-
+            
+            <Forms pokemon={pokemon}/>
+            
+            <Stats pokemon={pokemon}/>
+            
+            <Information pokemon={pokemon}/>
+            
             <CardText className="moveset">
-              <MoveSets movesets={movesets} pokemon={pokemon} />
+              <MoveSets movesets={movesets} pokemon={pokemon}/>
             </CardText>
-
+            
             <Row>
               <Col sm={12} lg={6}>
-                <Resistances typeChart={pokemon.typeChart} />
+                <Resistances typeChart={pokemon.typeChart}/>
               </Col>
               <Col sm={12} lg={6}>
-                <Weaknesses typeChart={pokemon.typeChart} />
+                <Weaknesses typeChart={pokemon.typeChart}/>
               </Col>
             </Row>
-
-            <Family family={pokemon.family} />
+            
+            <Family family={pokemon.family}/>
           </CardBody>
         </Card>
       );
@@ -631,7 +644,7 @@ const PokemonDetail = ({ id, form }) => (
 
 const Pokemon = props => {
   const { match } = props;
-
+  
   return (
     <div id="pokemon">
       <div className="container-fluid">

@@ -81,7 +81,7 @@ class Helpers {
       return `${pokemon.id}`;
     };
 
-    return pokemon.form !== null && pokemon.form !== undefined
+    return pokemon && pokemon.form !== null && pokemon.form !== undefined
       ? `https://db.pokemongohub.net/images/official/full/${imgId()}_f2.png`
       : `https://db.pokemongohub.net/images/official/full/${imgId()}.png`;
   };
