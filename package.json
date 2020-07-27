@@ -3,12 +3,11 @@
   "homepage": "https://pokemon-apollo.azurewebsites.net/",
   "version": "0.3.0",
   "private": true,
-  "precommit": "NODE_ENV=production lint-staged",
   "dependencies": {
     "apollo-boost": "0.4.9",
     "bootstrap": "4.5.0",
     "env-cmd": "10.1.0",
-    "graphql": "^14.3.1",
+    "graphql": "15.3.0",
     "history": "5.0.0",
     "lodash": "4.17.19",
     "material-design-icons": "3.0.1",
