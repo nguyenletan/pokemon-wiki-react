@@ -26,7 +26,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [GraphQL Playground](https://pokemon-wiki-apollo.herokuapp.com/graphql)
 
-
 ## Available Scripts
 
 In the project directory, you can run: 123

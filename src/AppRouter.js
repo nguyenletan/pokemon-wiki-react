@@ -1,9 +1,9 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Pokemons from './components/Pokemons';
-import Pokemon from './components/Pokemon';
-import PokemonWithGen from './components/PokemonWithGen';
-import Type from './components/Type';
+import React from "react"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import Pokemons from "./components/Pokemons"
+import Pokemon from "./components/Pokemon"
+import PokemonWithGen from "./components/PokemonWithGen"
+import Type from "./components/Type"
 
 const AppRouter = () => (
   <Router>
@@ -16,6 +16,6 @@ const AppRouter = () => (
       <Route path="/pokemon/:id/form/:form" component={Pokemon} />
     </Switch>
   </Router>
-);
+)
 
-export default AppRouter;
+export default AppRouter

@@ -1,12 +1,12 @@
-import React from 'react';
-import AppRouter from './AppRouter';
-import GitHubCornerIcon from './components/GitHubCornerIcon';
+import React from "react"
+import AppRouter from "./AppRouter"
+import GitHubCornerIcon from "./components/GitHubCornerIcon"
 
-const App = () =>  (
+const App = () => (
   <div className="App">
-    <GitHubCornerIcon/>
-    <AppRouter/>
+    <GitHubCornerIcon />
+    <AppRouter />
   </div>
-);
+)
 
-export default App;
+export default App

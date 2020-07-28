@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import React from "react"
+import { Card, CardBody, CardTitle, CardSubtitle, CardText } from "reactstrap"
 
 const BigSkeleton = () => (
   <Card className="big-skeleton">
@@ -15,6 +15,6 @@ const BigSkeleton = () => (
       <CardText className="card-loading-animation" />
     </CardBody>
   </Card>
-);
+)
 
-export default BigSkeleton;
+export default BigSkeleton

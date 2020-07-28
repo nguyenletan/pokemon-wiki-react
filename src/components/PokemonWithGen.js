@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Query } from 'react-apollo';
-import { gql } from 'apollo-boost';
-import { Button, ButtonGroup } from 'reactstrap';
-import Helpers from '../helpers/Helpers';
-import CardSkeleton from './CardSkeleton';
+import React from "react"
+import { Link, NavLink } from "react-router-dom"
+import { Query } from "react-apollo"
+import { gql } from "apollo-boost"
+import { Button, ButtonGroup } from "reactstrap"
+import Helpers from "../helpers/Helpers"
+import CardSkeleton from "./CardSkeleton"
 
 // add some queries for retrieving all Lifts and all Trails
 // language=GraphQL
@@ -23,22 +23,22 @@ const GET_POKEMON_QUERY = gql`
       index
     }
   }
-`;
+`
 
 const PokemonDetail = props => {
-  const { pokemon, index, gen } = props;
-  let normalizePoke = pokemon;
+  const { pokemon, index, gen } = props
+  let normalizePoke = pokemon
   if (pokemon !== null) {
-    normalizePoke = Helpers.normalizePokemon2(normalizePoke);
+    normalizePoke = Helpers.normalizePokemon2(normalizePoke)
   }
-  const imgUrl = Helpers.getPokemonImgUrlWithoutCheckForm(normalizePoke);
+  const imgUrl = Helpers.getPokemonImgUrlWithoutCheckForm(normalizePoke)
 
-  const name = Helpers.getPokeName(normalizePoke);
+  const name = Helpers.getPokeName(normalizePoke)
 
-  const aceIcons = ['♥', '♠', '♦', '♣'];
-  const aceClassNameColors = ['text-danger', 'text-dark'];
+  const aceIcons = ["♥", "♠", "♦", "♣"]
+  const aceClassNameColors = ["text-danger", "text-dark"]
 
-  const linkUrl = `/pokemon/${normalizePoke.id}`;
+  const linkUrl = `/pokemon/${normalizePoke.id}`
   return (
     <li key={`pokemon${index}`}>
       <Link to={linkUrl} className={`gen-${gen}`}>
@@ -72,8 +72,8 @@ const PokemonDetail = props => {
         </p>
       </Link>
     </li>
-  );
-};
+  )
+}
 
 const PokemonsList = ({ gen }) => (
   <Query
@@ -85,43 +85,43 @@ const PokemonsList = ({ gen }) => (
     {({ loading, error, data }) => {
       // waiting query executing
       if (loading) {
-        const loadingPrototype = [];
+        const loadingPrototype = []
         for (let i = 0; i < 12; i += 1) {
           loadingPrototype.push(
             <li key={i}>
               <CardSkeleton />
             </li>
-          );
+          )
         }
-        return <ul className="pokemon-list">{loadingPrototype}</ul>;
+        return <ul className="pokemon-list">{loadingPrototype}</ul>
       }
 
       // show error message
       if (error) {
-        return `${error}!`;
+        return `${error}!`
       }
 
       // when finish query executing
       if (!loading) {
         const cols = data.getPokemonsByGen.map((poke, i) => (
           <PokemonDetail index={i} pokemon={poke} key={i} gen={gen} />
-        ));
+        ))
         return (
           <ul className="pokemon-list" id={`pokemons-gen-${gen}`}>
             {cols}
           </ul>
-        );
+        )
       }
-      return null;
+      return null
     }}
   </Query>
-);
+)
 
-const isActive = (genId, buttonGenId) => genId === buttonGenId;
+const isActive = (genId, buttonGenId) => genId === buttonGenId
 
 const Pokemons = props => {
-  const { match } = props;
-  const genId = match.params.gen === undefined ? 1 : Number(match.params.gen);
+  const { match } = props
+  const genId = match.params.gen === undefined ? 1 : Number(match.params.gen)
   return (
     <div id="pokemons-gen">
       <h1>Pokémons Gen {Helpers.romanize(genId)}</h1>
@@ -131,7 +131,7 @@ const Pokemons = props => {
             <Button
               outline
               color="success"
-              className={isActive(1, genId) ? 'active' : ''}
+              className={isActive(1, genId) ? "active" : ""}
             >
               Gen I
             </Button>
@@ -140,7 +140,7 @@ const Pokemons = props => {
             <Button
               outline
               color="danger"
-              className={isActive(2, genId) ? 'active' : ''}
+              className={isActive(2, genId) ? "active" : ""}
             >
               Gen II
             </Button>
@@ -149,7 +149,7 @@ const Pokemons = props => {
             <Button
               outline
               color="primary"
-              className={isActive(3, genId) ? 'active' : ''}
+              className={isActive(3, genId) ? "active" : ""}
             >
               Gen III
             </Button>
@@ -158,7 +158,7 @@ const Pokemons = props => {
             <Button
               outline
               color="secondary"
-              className={isActive(4, genId) ? 'active' : ''}
+              className={isActive(4, genId) ? "active" : ""}
             >
               Gen IV
             </Button>
@@ -167,7 +167,7 @@ const Pokemons = props => {
             <Button
               outline
               color="warning"
-              className={isActive(5, genId) ? 'active' : ''}
+              className={isActive(5, genId) ? "active" : ""}
             >
               Gen V
             </Button>
@@ -176,7 +176,7 @@ const Pokemons = props => {
             <Button
               outline
               color="info"
-              className={isActive(6, genId) ? 'active' : ''}
+              className={isActive(6, genId) ? "active" : ""}
             >
               Gen VI
             </Button>
@@ -185,7 +185,7 @@ const Pokemons = props => {
             <Button
               outline
               color="dark"
-              className={isActive(7, genId) ? 'active' : ''}
+              className={isActive(7, genId) ? "active" : ""}
             >
               Gen VII
             </Button>
@@ -194,7 +194,7 @@ const Pokemons = props => {
         <PokemonsList gen={genId} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Pokemons;
+export default Pokemons

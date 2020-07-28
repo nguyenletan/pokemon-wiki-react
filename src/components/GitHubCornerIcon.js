@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 
 const GitHubCornerIcon = () => (
   <a
@@ -23,6 +23,6 @@ const GitHubCornerIcon = () => (
       />
     </svg>
   </a>
-);
+)
 
-export default GitHubCornerIcon;
+export default GitHubCornerIcon

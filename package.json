@@ -30,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build --production",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"**/*.{js,jsx,json,md,mdx}\""
   },
   "eslintConfig": {
     "extends": "react-app"
